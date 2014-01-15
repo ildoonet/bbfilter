@@ -2,15 +2,15 @@ MIDlet-Name: BBFilter
 MIDlet-Version: 1.0.0
 MIDlet-Vendor: BlackBerry Developer
 MIDlet-Jar-URL: BBFilter.jar
-MIDlet-Jar-Size: 50104
+MIDlet-Jar-Size: 46249
 MicroEdition-Profile: MIDP-2.0
 MicroEdition-Configuration: CLDC-1.1
 MIDlet-1: ,res/img/icon.png,
 RIM-MIDlet-Flags-1: 0
 Manifest-Version: 1.0
 RIM-COD-URL: BBFilter.cod
-RIM-COD-Size: 24564
-RIM-COD-Creation-Time: 1389779285
+RIM-COD-Size: 20656
+RIM-COD-Creation-Time: 1389780365
 RIM-COD-Module-Name: BBFilter
 RIM-COD-Module-Dependencies: net_rim_cldc
-RIM-COD-SHA1: 22 a4 98 81 6d eb 0d f3 af c9 d3 53 91 69 39 5f e3 30 96 ce
+RIM-COD-SHA1: 94 f2 1d d9 9a 94 f8 fd 08 7c a4 dc 59 ed 88 1a 8d 6e 16 33

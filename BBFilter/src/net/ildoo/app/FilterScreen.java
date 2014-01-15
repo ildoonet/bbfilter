@@ -1,6 +1,7 @@
 package net.ildoo.app;
 
 import net.ildoo.bbfilter.filter.FilterStark;
+import net.ildoo.bbfilter.filter.FilterStark2;
 import net.ildoo.bbfilter.filter.FilterSunnySide;
 import net.ildoo.bbfilter.filter.FilterVintage;
 import net.ildoo.bbfilter.filter.FilterWorn;
@@ -28,6 +29,7 @@ public final class FilterScreen extends MainScreen
         FlowFieldManager ffm = new FlowFieldManager();
         ffm.add(new BitmapField(bitmap));
         ffm.add(new BitmapField((new FilterStark().filtering(bitmap))));
+        ffm.add(new BitmapField((new FilterStark2().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterSunnySide().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterVintage().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterWorn().filtering(bitmap))));

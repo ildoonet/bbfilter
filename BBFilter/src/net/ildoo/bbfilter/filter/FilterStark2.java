@@ -1,6 +1,6 @@
 package net.ildoo.bbfilter.filter;
 
-public class FilterStark extends Filter {
+public class FilterStark2 extends Filter {
 	protected float[] getTransformMatrix() {
 		return new float[] { 
                 1, 0, 0, 0, -90, 
@@ -10,6 +10,6 @@ public class FilterStark extends Filter {
 	}
 	
 	protected float getSaturation() {
-		return 0.2f;
+		return 0.5f;
 	}
 }

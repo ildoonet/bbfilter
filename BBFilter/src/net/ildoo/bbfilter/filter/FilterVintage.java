@@ -10,4 +10,7 @@ public class FilterVintage extends Filter {
                 0, 0, 0, 1, 0 };
 	}
 
+	protected float getSaturation() {
+		return 0.9f;
+	}
 }
