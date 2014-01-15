@@ -73,15 +73,22 @@ class ColorMatrix {
         
         final int[] filtered = new int[4];
 		for (int i = 0; i < 4; i++) {
-			final int ROW = i * 5 + 0;
-	        filtered[i] = (int)(vector_inner_product(mArray[ROW + 0], mArray[ROW + 1], mArray[ROW + 2], mArray[ROW + 3], nRed, nGreen, nBlue, nAlpha) + mArray[ROW + 4]);
+			final int ROW = i * 5;
+	        filtered[i] = bound((int)(vector_inner_product(mArray[ROW + 0], mArray[ROW + 1], mArray[ROW + 2], mArray[ROW + 3], mArray[ROW + 4], nRed, nGreen, nBlue, nAlpha, 1)), 
+	        		0 , 255);
 		}
 
         return filtered[2] | (filtered[1]<<8) | (filtered[0]<<16) | (filtered[3]<<24);
     }
     
-    private final int vector_inner_product(float v1, float v2, float v3, float v4, int w1, int w2, int w3, int w4) {
-    	return (int) (v1 * w1 + v2 * w2 + v3 * w3 + v4 * w4);
+    private final int vector_inner_product(float v1, float v2, float v3, float v4, float v5, int w1, int w2, int w3, int w4, int w5) {
+    	return (int) (v1 * w1 + v2 * w2 + v3 * w3 + v4 * w4 + v5 * w5);
+    }
+    
+    private final int bound(int value, int min, int max) {
+    	value = Math.min(value, max);
+    	value = Math.max(value, min);
+    	return value;
     }
     
     /**
@@ -104,7 +111,7 @@ class ColorMatrix {
      * Assign the src colormatrix into this matrix, copying all of its values.
      */
     public void set(ColorMatrix src) {
-        System.arraycopy(src.mArray, 0, mArray, 0, 20);
+    	set(src.mArray);
     }
 
     /**

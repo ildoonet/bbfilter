@@ -14,11 +14,15 @@ abstract class Filter {
 		
 		// apply filter set
 		final ColorMatrix cm = new ColorMatrix();
-		cm.set(getTransformMatrix());
-		cm.setSaturation(getSaturation());
-
-		for (int i = 0; i < argbs.length; i++) {
-            argbs[i] = cm.getColor(argbs[i]);
+		
+		if (getTransformMatrix() != null) {
+			cm.set(getTransformMatrix());
+			run(cm, argbs);
+		}
+		
+		if (getSaturation() <= 1.0f && getSaturation() > 0) {
+			cm.setSaturation(getSaturation());
+			run(cm, argbs);
 		}
 		
 		// generate bitmap object
@@ -26,6 +30,12 @@ abstract class Filter {
 		revised.setARGB(argbs, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
 		
 		return revised;
+	}
+	
+	private void run(ColorMatrix cm, int[] argbs) {
+		for (int i = 0; i < argbs.length; i++) {
+            argbs[i] = cm.getColor(argbs[i]);
+		}
 	}
 	
 	protected float getSaturation() {
