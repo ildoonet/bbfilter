@@ -1,4 +1,4 @@
-package com.ildoo.bbfilter;
+package net.ildoo.app;
 
 import net.rim.device.api.ui.container.MainScreen;
 
