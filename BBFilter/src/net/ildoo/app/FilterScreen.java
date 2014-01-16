@@ -4,6 +4,7 @@ import net.ildoo.bbfilter.filter.FilterStark;
 import net.ildoo.bbfilter.filter.FilterStark2;
 import net.ildoo.bbfilter.filter.FilterSunnySide;
 import net.ildoo.bbfilter.filter.FilterVintage;
+import net.ildoo.bbfilter.filter.FilterVintageVinette;
 import net.ildoo.bbfilter.filter.FilterWorn;
 import net.ildoo.bbfilter.filter.FilterWornBottomGradient;
 import net.rim.device.api.system.Bitmap;
@@ -33,6 +34,7 @@ public final class FilterScreen extends MainScreen
         ffm.add(new BitmapField((new FilterStark().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterSunnySide().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterVintage().filtering(bitmap))));
+        ffm.add(new BitmapField((new FilterVintageVinette().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterWorn().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterWornBottomGradient().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterStark2().filtering(bitmap))));

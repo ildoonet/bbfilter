@@ -5,6 +5,7 @@ import net.ildoo.bbfilter.filter.ColorMatrix;
 public abstract class Gradient {
 	protected XY fromXY, toXY;
 	protected final ColorMatrix cm;
+	protected int width, height;
 	
 	public Gradient() {
 		cm = new ColorMatrix();
@@ -20,6 +21,9 @@ public abstract class Gradient {
 		if (argbs.length != width * height)
 			throw new IllegalArgumentException("size of argbs[] must be equal to width * height");
 
+		this.width = width;
+		this.height = height;
+		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 		        final int t = getTransformedColor(argbs[x + y * width], x, y);
@@ -41,7 +45,7 @@ public abstract class Gradient {
 			s, 0, 0, 0, 0,
 			0, s, 0, 0, 0,
 			0, 0, s, 0, 0,
-			0, 0, 0, s, 0
+			0, 0, 0, 1, 0
 		});
 		return cm.getColor(argb);
 	}
