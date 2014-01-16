@@ -34,7 +34,7 @@ package net.ildoo.bbfilter.filter;
  *   B' = k*R + l*G + m*B + n*A + o;
  *   A' = p*R + q*G + r*B + s*A + t;
  */
-class ColorMatrix {
+public class ColorMatrix {
 
     private final float[] mArray = new float[20];
 
@@ -81,7 +81,7 @@ class ColorMatrix {
         return filtered[2] | (filtered[1]<<8) | (filtered[0]<<16) | (filtered[3]<<24);
     }
     
-    private final int vector_inner_product(float v1, float v2, float v3, float v4, float v5, int w1, int w2, int w3, int w4, int w5) {
+    private final static int vector_inner_product(float v1, float v2, float v3, float v4, float v5, int w1, int w2, int w3, int w4, int w5) {
     	return (int) (v1 * w1 + v2 * w2 + v3 * w3 + v4 * w4 + v5 * w5);
     }
     

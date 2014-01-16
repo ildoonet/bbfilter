@@ -1,5 +1,6 @@
 package net.ildoo.bbfilter.filter;
 
+import net.ildoo.bbfilter.gradient.Gradient;
 import net.rim.device.api.system.Bitmap;
 
 abstract class Filter {
@@ -25,6 +26,22 @@ abstract class Filter {
 			run(cm, argbs);
 		}
 		
+		if (getGradient(bitmap.getWidth(), bitmap.getHeight()) != null) {
+			Gradient g = getGradient(bitmap.getWidth(), bitmap.getHeight());
+			g.gradient(argbs, bitmap.getWidth(), bitmap.getHeight());
+		}
+		
+		if (getBrightness() != 1.0f) {
+			float f = getBrightness();
+			cm.set(new float[] {
+				f, 0, 0, 0, 0,
+				0, f, 0, 0, 0,
+				0, 0, f, 0, 0,
+				0, 0, 0, 1, 0
+			});
+			run(cm, argbs);
+		}
+		
 		// generate bitmap object
 		final Bitmap revised = new Bitmap(bitmap.getWidth(), bitmap.getHeight());
 		revised.setARGB(argbs, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
@@ -39,6 +56,14 @@ abstract class Filter {
 	}
 	
 	protected float getSaturation() {
+		return 1.0f;
+	}
+	
+	protected Gradient getGradient(int width, int height) {
+		return null;
+	}
+	
+	protected float getBrightness() {
 		return 1.0f;
 	}
 	

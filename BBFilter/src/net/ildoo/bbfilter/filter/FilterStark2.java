@@ -12,4 +12,8 @@ public class FilterStark2 extends Filter {
 	protected float getSaturation() {
 		return 0.5f;
 	}
+	
+	protected float getBrightness() {
+		return 1.5f;
+	}
 }

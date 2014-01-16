@@ -5,6 +5,7 @@ import net.ildoo.bbfilter.filter.FilterStark2;
 import net.ildoo.bbfilter.filter.FilterSunnySide;
 import net.ildoo.bbfilter.filter.FilterVintage;
 import net.ildoo.bbfilter.filter.FilterWorn;
+import net.ildoo.bbfilter.filter.FilterWornBottomGradient;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.container.FlowFieldManager;
@@ -27,12 +28,15 @@ public final class FilterScreen extends MainScreen
         Bitmap bitmap = Bitmap.getBitmapResource("testpic.jpg");
         
         FlowFieldManager ffm = new FlowFieldManager();
+        
         ffm.add(new BitmapField(bitmap));
         ffm.add(new BitmapField((new FilterStark().filtering(bitmap))));
-        ffm.add(new BitmapField((new FilterStark2().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterSunnySide().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterVintage().filtering(bitmap))));
         ffm.add(new BitmapField((new FilterWorn().filtering(bitmap))));
+        ffm.add(new BitmapField((new FilterWornBottomGradient().filtering(bitmap))));
+        ffm.add(new BitmapField((new FilterStark2().filtering(bitmap))));
+        
         add(ffm);
     }
 }

@@ -13,4 +13,8 @@ public class FilterVintage extends Filter {
 	protected float getSaturation() {
 		return 0.9f;
 	}
+	
+	protected float getBrightness() {
+		return 1.5f;
+	}
 }
