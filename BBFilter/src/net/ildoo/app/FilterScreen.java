@@ -18,6 +18,8 @@ import net.rim.device.api.ui.container.MainScreen;
  */
 public final class FilterScreen extends MainScreen
 {
+	private static final String TAG = "FilterScreen";
+	
     /**
      * Creates a new FilterScreen object
      */
@@ -30,14 +32,23 @@ public final class FilterScreen extends MainScreen
         
         FlowFieldManager ffm = new FlowFieldManager();
         
+        TimerLogger.log(TAG, "start");
         ffm.add(new BitmapField(bitmap));
+        TimerLogger.log(TAG, "original end");
         ffm.add(new BitmapField((new FilterStark().filtering(bitmap))));
+        TimerLogger.log(TAG, "stark end");
         ffm.add(new BitmapField((new FilterSunnySide().filtering(bitmap))));
+        TimerLogger.log(TAG, "sunnyside end");
         ffm.add(new BitmapField((new FilterVintage().filtering(bitmap))));
+        TimerLogger.log(TAG, "vintage end");
         ffm.add(new BitmapField((new FilterVintageVinette().filtering(bitmap))));
+        TimerLogger.log(TAG, "vintagevinette end");
         ffm.add(new BitmapField((new FilterWorn().filtering(bitmap))));
+        TimerLogger.log(TAG, "worn end");
         ffm.add(new BitmapField((new FilterWornBottomGradient().filtering(bitmap))));
+        TimerLogger.log(TAG, "wormbottomgradient end");
         ffm.add(new BitmapField((new FilterStark2().filtering(bitmap))));
+        TimerLogger.log(TAG, "stark2 end");
         
         add(ffm);
     }

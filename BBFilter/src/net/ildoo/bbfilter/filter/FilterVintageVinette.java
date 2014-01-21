@@ -11,5 +11,4 @@ public class FilterVintageVinette extends FilterVintage {
 		eg.setXY(XY.create((int)(width * 0.75), (int)(height*0.75)), XY.create(0, 0));
 		return eg;
 	}
-	
 }
