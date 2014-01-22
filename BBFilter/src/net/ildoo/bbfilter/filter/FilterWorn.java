@@ -10,4 +10,7 @@ public class FilterWorn extends Filter {
                 0, 0, 0, 1, 0 };
 	}
 
+	protected float getBrightness() {
+		return 1.2f;
+	}
 }
