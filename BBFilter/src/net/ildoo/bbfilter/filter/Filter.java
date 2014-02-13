@@ -3,7 +3,7 @@ package net.ildoo.bbfilter.filter;
 import net.ildoo.bbfilter.gradient.Gradient;
 import net.rim.device.api.system.Bitmap;
 
-abstract class Filter {
+public abstract class Filter {
 	protected abstract float[] getTransformMatrix();
 
 	public Bitmap filtering(final Bitmap bitmap) {

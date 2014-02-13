@@ -1,4 +1,6 @@
-package net.ildoo.bbfilter.filter;
+package net.ildoo.bbfilter.filter.toy;
+
+import net.ildoo.bbfilter.filter.Filter;
 
 public class FilterToy extends Filter {
 
