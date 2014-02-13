@@ -11,6 +11,8 @@ import net.rim.device.api.ui.UiApplication;
 
 public class FilterManager {
 	private static final String TAG = "FilterManager";
+	private static final int THUMBW = 100;
+	private static final int THUMBH = 100;
 	private static FilterGroup[] filterGroups;
 	
 	{
@@ -48,13 +50,16 @@ public class FilterManager {
 					return;
 				}
 				
+				Bitmap smallBitmap = new Bitmap(THUMBW, THUMBH);
+				bitmap.scaleInto(smallBitmap, Bitmap.FILTER_LANCZOS, Bitmap.SCALE_TO_FILL);
+				
 				for (int i = 0; i < filters.length; i++) {
 					try {
 						Filter f = (Filter) filters[i].newInstance();
 						
 						FilteredBitmap fb = new FilteredBitmap();
 						fb.setFilterClass(filters[i]);
-						fb.setFilterBitmap(f.filtering(bitmap));
+						fb.setFilterBitmap(f.filtering(smallBitmap));
 						
 						vector.addElement(fb);
 					} catch (Exception e) {
