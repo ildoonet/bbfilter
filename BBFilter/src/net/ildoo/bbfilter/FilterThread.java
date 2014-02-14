@@ -7,11 +7,13 @@ public class FilterThread extends Thread {
 		return worker;
 	}
 	
-	
-	
 	private volatile boolean isCanceled;
 	
 	public FilterThread() {
+		this(true);
+	}
+	
+	public FilterThread(boolean cancelPrevThread) {
 		if (worker != null && worker.isAlive()) {
 			worker.cancel();
 		}

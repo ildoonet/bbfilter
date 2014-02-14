@@ -3,10 +3,12 @@ package net.ildoo.bbfilter;
 import java.util.Vector;
 
 import net.ildoo.app.TimerLogger;
+import net.ildoo.bbfilter.blur.Blur;
 import net.ildoo.bbfilter.filter.Filter;
 import net.ildoo.bbfilter.filter.FilterGroup;
 import net.ildoo.bbfilter.filter.toy.FilterGroupToy;
 import net.rim.device.api.system.Bitmap;
+import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
 
 public class FilterManager {
@@ -55,6 +57,10 @@ public class FilterManager {
 				
 				for (int i = 0; i < filters.length; i++) {
 					try {
+						if (isCanceled() == true) {
+							return;
+						}
+						
 						Filter f = (Filter) filters[i].newInstance();
 						
 						FilteredBitmap fb = new FilteredBitmap();
@@ -86,6 +92,30 @@ public class FilterManager {
 				});
 				
 				TimerLogger.tlog(TAG, "requestThumbs Thread -");
+			}
+		};
+		
+		worker.start();
+	}
+	
+	public void requestBlurredBacgkround(final Bitmap bitmap, final Field field) {
+		TimerLogger.log(TAG, "requestThumbs()+");
+		
+		Thread worker = new FilterThread(false) {
+			public void run() {
+				final int width = field.getWidth();
+				final int height = field.getHeight();
+				
+				Bitmap resized = new Bitmap(width, height);
+				bitmap.scaleInto(resized, Bitmap.FILTER_BOX, Bitmap.SCALE_TO_FILL);
+				
+				final Bitmap blurred = Blur.fastblur(resized, 40);
+				
+				UiApplication.getUiApplication().invokeLater(new Runnable() {
+					public void run() {
+						listener.onBlurred(blurred, field);
+					}
+				});
 			}
 		};
 		
