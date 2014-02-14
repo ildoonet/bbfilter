@@ -1,4 +1,6 @@
-package net.ildoo.bbfilter.filter;
+package net.ildoo.bbfilter.filter.sunny;
+
+import net.ildoo.bbfilter.filter.Filter;
 
 public class FilterSunnySide extends Filter {
 

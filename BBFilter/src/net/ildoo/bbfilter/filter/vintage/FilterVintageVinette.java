@@ -1,4 +1,4 @@
-package net.ildoo.bbfilter.filter;
+package net.ildoo.bbfilter.filter.vintage;
 
 import net.ildoo.bbfilter.gradient.Gradient;
 import net.ildoo.bbfilter.gradient.Gradient.XY;

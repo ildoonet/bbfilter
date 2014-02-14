@@ -1,4 +1,6 @@
-package net.ildoo.bbfilter.filter;
+package net.ildoo.bbfilter.filter.classic;
+
+import net.ildoo.bbfilter.filter.Filter;
 
 public class FilterAntique extends Filter {
 

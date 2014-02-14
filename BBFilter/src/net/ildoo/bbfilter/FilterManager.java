@@ -6,7 +6,15 @@ import net.ildoo.app.TimerLogger;
 import net.ildoo.bbfilter.blur.Blur;
 import net.ildoo.bbfilter.filter.Filter;
 import net.ildoo.bbfilter.filter.FilterGroup;
+import net.ildoo.bbfilter.filter.calm.FilterGroupCalm;
+import net.ildoo.bbfilter.filter.classic.FilterGroupClassic;
+import net.ildoo.bbfilter.filter.romance.FilterGroupRomance;
+import net.ildoo.bbfilter.filter.sepia.FilterGroupSepia;
+import net.ildoo.bbfilter.filter.stark.FilterGroupStark;
+import net.ildoo.bbfilter.filter.sunny.FilterGroupSunnySide;
 import net.ildoo.bbfilter.filter.toy.FilterGroupToy;
+import net.ildoo.bbfilter.filter.vintage.FilterGroupVintage;
+import net.ildoo.bbfilter.filter.whitecat.FilterGroupWhitecat;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
@@ -19,7 +27,15 @@ public class FilterManager {
 	
 	{
 		filterGroups = new FilterGroup[] {
-				new FilterGroupToy()
+				new FilterGroupCalm(),
+				new FilterGroupClassic(),
+				new FilterGroupRomance(),
+				new FilterGroupSepia(),
+				new FilterGroupStark(),
+				new FilterGroupSunnySide(),
+				new FilterGroupToy(),
+				new FilterGroupVintage(),
+				new FilterGroupWhitecat(),
 		};
 	}
 	
@@ -68,6 +84,8 @@ public class FilterManager {
 						fb.setFilterBitmap(f.filtering(smallBitmap));
 						
 						vector.addElement(fb);
+						
+						listener.onProgressChanged((float)i / filters.length);
 					} catch (Exception e) {
 						TimerLogger.log(TAG, "getThumbs() e = " + e.toString());
 					}

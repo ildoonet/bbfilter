@@ -3,6 +3,18 @@ package net.ildoo.app;
 import net.ildoo.bbfilter.FilterListener;
 import net.ildoo.bbfilter.FilterManager;
 import net.ildoo.bbfilter.FilteredBitmap;
+import net.ildoo.bbfilter.filter.romance.FilterClear;
+import net.ildoo.bbfilter.filter.romance.FilterRomance;
+import net.ildoo.bbfilter.filter.sepia.FilterSepia;
+import net.ildoo.bbfilter.filter.sepia.FilterSepia2;
+import net.ildoo.bbfilter.filter.stark.FilterStark;
+import net.ildoo.bbfilter.filter.stark.FilterStark2;
+import net.ildoo.bbfilter.filter.sunny.FilterSunnySide;
+import net.ildoo.bbfilter.filter.vintage.FilterVintage;
+import net.ildoo.bbfilter.filter.vintage.FilterWorn;
+import net.ildoo.bbfilter.filter.vintage.FilterWornBottomGradient;
+import net.ildoo.bbfilter.filter.whitecat.FilterBW;
+import net.ildoo.bbfilter.filter.whitecat.FilterWhiteCat;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
@@ -46,48 +58,18 @@ public final class FilterScreen extends MainScreen
 		        filterManager.requestBlurredBacgkround(bitmap, getMainManager());
 			}
 		});
-//        ffm.add(new BitmapField((new FilterSunrise().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterSunrise end");
-//        ffm.add(new BitmapField((new FilterCalm().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterCalm end");
-//        ffm.add(new BitmapField((new FilterCool().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterCool end");
-//        ffm.add(new BitmapField((new FilterWhiteCat().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterWhiteCat end");
-//        ffm.add(new BitmapField((new FilterAntique().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterAntique end");
-//        ffm.add(new BitmapField((new FilterBW().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterBW end");
-//        ffm.add(new BitmapField((new FilterSepia().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterSepia end");
-//        ffm.add(new BitmapField((new FilterToy().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterToy end");
-//        ffm.add(new BitmapField((new FilterToyVignette().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterToyVignette end");
-//        ffm.add(new BitmapField((new FilterSepia2().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterSepia2 end");
-//        ffm.add(new BitmapField((new FilterRomance().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterRomance end");
-//        ffm.add(new BitmapField((new FilterClear().filtering(bitmap))));
-//        TimerLogger.log(TAG, "FilterClear end");
-//        
-//        ffm.add(new BitmapField((new FilterStark().filtering(bitmap))));
-//        TimerLogger.log(TAG, "stark end");
-//        ffm.add(new BitmapField((new FilterSunnySide().filtering(bitmap))));
-//        TimerLogger.log(TAG, "sunnyside end");
-//        ffm.add(new BitmapField((new FilterVintage().filtering(bitmap))));
-//        TimerLogger.log(TAG, "vintage end");
+
+        Bitmap bitmap = Bitmap.getBitmapResource("testpic.jpg");
+        ffm.add(new BitmapField((new FilterRomance().filtering(bitmap))));
+        TimerLogger.log(TAG, "FilterRomance end");
+        ffm.add(new BitmapField((new FilterClear().filtering(bitmap))));
+        TimerLogger.log(TAG, "FilterClear end");
         
-//        ffm.add(new BitmapField((new FilterWorn().filtering(bitmap))));
-//        TimerLogger.log(TAG, "worn end");
-//        ffm.add(new BitmapField((new FilterWornBottomGradient().filtering(bitmap))));
-//        TimerLogger.log(TAG, "wormbottomgradient end");
-//        ffm.add(new BitmapField((new FilterStark2().filtering(bitmap))));
-//        TimerLogger.log(TAG, "stark2 end");
+        ffm.add(new BitmapField((new FilterSunnySide().filtering(bitmap))));
+        TimerLogger.log(TAG, "sunnyside end");
     }
     
     FilterListener listener = new FilterListener() {
-		
 		public void onThumbnailed(FilteredBitmap[] thumbs) {
 			TimerLogger.log(TAG, "onThumbnailed()+");
 			for (int i = 0; i < thumbs.length; i++) {
@@ -105,12 +87,12 @@ public final class FilterScreen extends MainScreen
 		public void onBlurred(Bitmap bitmap, Field field) {
 			TimerLogger.log(TAG, "onBlurred()+");
 			if (field != null)
-				field.setBackground(BackgroundFactory.createBitmapBackground(bitmap, Background.POSITION_X_CENTER, Background.POSITION_Y_TOP, Background.REPEAT_SCALE_TO_FIT));
+				field.setBackground(BackgroundFactory.createBitmapBackground(bitmap, Background.POSITION_X_LEFT, Background.POSITION_Y_TOP, Background.REPEAT_SCALE_TO_FIT));
 			TimerLogger.log(TAG, "onBlurred()-");
 		}
 		
 		public void onProgressChanged(float percentage) {
-			
+			TimerLogger.log(TAG, "onProgressChanged()+ " + percentage);
 		}
 		
 		public void onFilterFail() {

@@ -1,4 +1,6 @@
-package net.ildoo.bbfilter.filter;
+package net.ildoo.bbfilter.filter.stark;
+
+import net.ildoo.bbfilter.filter.Filter;
 
 public class FilterStark2 extends Filter {
 	protected float[] getTransformMatrix() {

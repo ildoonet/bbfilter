@@ -1,4 +1,6 @@
-package net.ildoo.bbfilter.filter;
+package net.ildoo.bbfilter.filter.whitecat;
+
+import net.ildoo.bbfilter.filter.Filter;
 
 public class FilterWhiteCat extends Filter {
 
