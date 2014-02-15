@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="DabinciBBUI">
+		<name >
+			
+		</name>
+		<description >
+			
+		</description>
+		<version >
+			1.0.0
+		</version>
+		<vendor >
+			BlackBerry Developer
+		</vendor>
+		<copyright >
+			Copyright (c) 2014 BlackBerry Developer
+		</copyright>
+		<fileset Java="1.55" _blackberryVersion="[5.0.0)">
+			<directory >
+				5.0.0
+			</directory>
+			<files >
+				DabinciBBUI.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>

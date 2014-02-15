@@ -1,0 +1,15 @@
+MIDlet-Name: DabinciBBUI
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: BlackBerry Developer
+MIDlet-Jar-URL: DabinciBBUI.jar
+MIDlet-Jar-Size: 31598
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+Manifest-Version: 1.0
+RIM-COD-URL: DabinciBBUI.cod
+RIM-COD-Size: 20992
+RIM-COD-Creation-Time: 1392486492
+RIM-COD-Module-Name: DabinciBBUI
+RIM-COD-Module-Dependencies: net_rim_cldc
+RIM-COD-SHA1: 7f 78 ea c2 f4 3f 82 60 e9 5b 84 7b d9 43 8f 04 31 f4 54 53
+RIM-Library-Flags: 2

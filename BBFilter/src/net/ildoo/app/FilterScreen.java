@@ -3,18 +3,6 @@ package net.ildoo.app;
 import net.ildoo.bbfilter.FilterListener;
 import net.ildoo.bbfilter.FilterManager;
 import net.ildoo.bbfilter.FilteredBitmap;
-import net.ildoo.bbfilter.filter.romance.FilterClear;
-import net.ildoo.bbfilter.filter.romance.FilterRomance;
-import net.ildoo.bbfilter.filter.sepia.FilterSepia;
-import net.ildoo.bbfilter.filter.sepia.FilterSepia2;
-import net.ildoo.bbfilter.filter.stark.FilterStark;
-import net.ildoo.bbfilter.filter.stark.FilterStark2;
-import net.ildoo.bbfilter.filter.sunny.FilterSunnySide;
-import net.ildoo.bbfilter.filter.vintage.FilterVintage;
-import net.ildoo.bbfilter.filter.vintage.FilterWorn;
-import net.ildoo.bbfilter.filter.vintage.FilterWornBottomGradient;
-import net.ildoo.bbfilter.filter.whitecat.FilterBW;
-import net.ildoo.bbfilter.filter.whitecat.FilterWhiteCat;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
@@ -58,15 +46,6 @@ public final class FilterScreen extends MainScreen
 		        filterManager.requestBlurredBacgkround(bitmap, getMainManager());
 			}
 		});
-
-        Bitmap bitmap = Bitmap.getBitmapResource("testpic.jpg");
-        ffm.add(new BitmapField((new FilterRomance().filtering(bitmap))));
-        TimerLogger.log(TAG, "FilterRomance end");
-        ffm.add(new BitmapField((new FilterClear().filtering(bitmap))));
-        TimerLogger.log(TAG, "FilterClear end");
-        
-        ffm.add(new BitmapField((new FilterSunnySide().filtering(bitmap))));
-        TimerLogger.log(TAG, "sunnyside end");
     }
     
     FilterListener listener = new FilterListener() {

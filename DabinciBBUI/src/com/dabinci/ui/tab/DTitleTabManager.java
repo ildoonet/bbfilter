@@ -1,0 +1,105 @@
+package com.dabinci.ui.tab;
+
+import net.rim.device.api.system.Bitmap;
+import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.Manager;
+import net.rim.device.api.ui.XYEdges;
+import net.rim.device.api.ui.container.HorizontalFieldManager;
+import net.rim.device.api.ui.container.VerticalFieldManager;
+import net.rim.device.api.ui.decor.BackgroundFactory;
+
+import com.dabinci.ui.DColor;
+import com.dabinci.ui.DResolution;
+import com.dabinci.ui.button.DToggleButtonField;
+
+public class DTitleTabManager extends VerticalFieldManager {
+	
+	private final HorizontalFieldManager tabs;
+	private final VerticalFieldManager container;
+	private TabFocusChangeListener listener;
+	
+	public DTitleTabManager() {
+		super(Manager.USE_ALL_WIDTH | Field.FIELD_HCENTER);
+		setBackground(BackgroundFactory.createSolidBackground(DColor.getColor(DColor.COLOR_BG)));
+		add(tabs = new HorizontalFieldManager(Manager.NO_HORIZONTAL_SCROLL | Field.FIELD_HCENTER));
+		container = new VerticalFieldManager(Manager.USE_ALL_WIDTH);
+	}
+	
+	public VerticalFieldManager getContainer() {
+		return container;
+	}
+	
+	public void addTab(Bitmap icon, Bitmap icon_on, DTabContent content) {
+		DTitleTab tab = new DTitleTab(icon, icon_on, content);
+		tab.setPadding(new XYEdges(
+				DResolution.getPixel(3),
+				DResolution.getPixel(20),
+				DResolution.getPixel(3),
+				DResolution.getPixel(20)
+			));
+		tabs.add(tab);
+	}
+
+	public void setTab(int idx) {
+		setAllTabOff();
+		
+		DTitleTab tab = (DTitleTab) tabs.getField(idx);
+		tab.setStatus(true);
+	}
+	
+	public void setTabChangeListener(TabFocusChangeListener listener) {
+		this.listener = listener;
+	}
+	
+	private void setContents(Field field) {
+		container.deleteAll();
+		container.add(field);
+	}
+	
+	private void setAllTabOff() {
+		for (int i = 0; i < tabs.getFieldCount(); i++) {
+			DTitleTab tab = (DTitleTab) tabs.getField(i);
+			tab.setStatus(false);
+		}
+	}
+	
+	protected void onFocus(int direction) {
+		super.onFocus(direction);
+		listener.onTabFocus();
+	}
+	
+	protected void onUnfocus() {
+		super.onUnfocus();
+		listener.onTabUnfocus();
+	}
+	
+	public class DTitleTab extends DToggleButtonField{
+		private final DTabContent content;
+		public DTitleTab(Bitmap icon, Bitmap icon_on, DTabContent content) {
+			super(icon, icon, icon_on, icon_on);
+			this.content = content;
+			
+			this.action = new Runnable() {
+				public void run() {
+					setContents(DTitleTab.this.content);
+				}
+			};
+		}
+		
+		protected boolean navigationClick(int status, int time) {
+			if (isToggled)
+				return true;
+			
+			setAllTabOff();
+			
+			return super.navigationClick(status, time);
+		}
+		
+		protected void onFocus(int direction) {
+			super.onFocus(direction);
+			if (DTitleTabManager.this.listener != null) {
+				DTitleTabManager.this.listener.onTabFocusChanged(this);
+			}
+		}
+	}
+}
