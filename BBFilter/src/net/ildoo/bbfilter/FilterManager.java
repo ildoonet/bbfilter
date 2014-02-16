@@ -2,7 +2,8 @@ package net.ildoo.bbfilter;
 
 import java.util.Vector;
 
-import net.ildoo.app.TimerLogger;
+import com.dabinci.utils.DLogger;
+
 import net.ildoo.bbfilter.blur.Blur;
 import net.ildoo.bbfilter.filter.Filter;
 import net.ildoo.bbfilter.filter.FilterGroup;
@@ -54,17 +55,17 @@ public class FilterManager {
 	}
 	
 	public void requestThumbs(final Bitmap bitmap, final FilterGroup filterGroup) {
-		TimerLogger.log(TAG, "requestThumbs()+ " + filterGroup.getGroupName());
+		DLogger.log(TAG, "requestThumbs()+ " + filterGroup.getGroupName());
 		
 		Thread worker = new FilterThread() {
 			public void run() {
-				TimerLogger.tlog(TAG, "requestThumbs Thread +");
+				DLogger.tlog(TAG, "requestThumbs Thread +");
 				
 				final Vector vector = new Vector();
 				final Class[] filters = filterGroup.getFilters();
 				
 				if (filters == null) {
-					TimerLogger.tlog(TAG, "filters is null.");
+					DLogger.tlog(TAG, "filters is null.");
 					return;
 				}
 				
@@ -87,7 +88,7 @@ public class FilterManager {
 						
 						listener.onProgressChanged((float)i / filters.length);
 					} catch (Exception e) {
-						TimerLogger.log(TAG, "getThumbs() e = " + e.toString());
+						DLogger.log(TAG, "getThumbs() e = " + e.toString());
 					}
 				}
 				
@@ -109,7 +110,7 @@ public class FilterManager {
 					}
 				});
 				
-				TimerLogger.tlog(TAG, "requestThumbs Thread -");
+				DLogger.tlog(TAG, "requestThumbs Thread -");
 			}
 		};
 		
@@ -117,7 +118,7 @@ public class FilterManager {
 	}
 	
 	public void requestBlurredBacgkround(final Bitmap bitmap, final Field field) {
-		TimerLogger.log(TAG, "requestThumbs()+");
+		DLogger.log(TAG, "requestThumbs()+");
 		
 		Thread worker = new FilterThread(false) {
 			public void run() {

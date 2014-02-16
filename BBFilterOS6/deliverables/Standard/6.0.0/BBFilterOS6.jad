@@ -1,0 +1,15 @@
+MIDlet-Name: BBFilterOS6
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: BlackBerry Developer
+MIDlet-Jar-URL: BBFilterOS6.jar
+MIDlet-Jar-Size: 4215
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+Manifest-Version: 1.0
+RIM-COD-URL: BBFilterOS6.cod
+RIM-COD-Size: 1880
+RIM-COD-Creation-Time: 1392528466
+RIM-COD-Module-Name: BBFilterOS6
+RIM-COD-Module-Dependencies: net_rim_cldc,BBFilterOS,net_rim_ui_api
+RIM-COD-SHA1: 6c ce 52 f7 7c dc 4a 92 a1 23 9b f7 81 ce d4 c4 d0 5e d4 35
+RIM-Library-Flags: 2

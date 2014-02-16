@@ -29,13 +29,13 @@ public class DTitleTabManager extends VerticalFieldManager {
 		return container;
 	}
 	
-	public void addTab(Bitmap icon, Bitmap icon_on, DTabContent content) {
-		DTitleTab tab = new DTitleTab(icon, icon_on, content);
+	public void addTab(String title, Bitmap icon, Bitmap icon_on, DTabContent content) {
+		DTitleTab tab = new DTitleTab(title, icon, icon_on, content);
 		tab.setPadding(new XYEdges(
 				DResolution.getPixel(3),
-				DResolution.getPixel(20),
+				DResolution.getPixel(25),
 				DResolution.getPixel(3),
-				DResolution.getPixel(20)
+				DResolution.getPixel(25)
 			));
 		tabs.add(tab);
 	}
@@ -45,6 +45,7 @@ public class DTitleTabManager extends VerticalFieldManager {
 		
 		DTitleTab tab = (DTitleTab) tabs.getField(idx);
 		tab.setStatus(true);
+		setContents(tab.content);
 	}
 	
 	public void setTabChangeListener(TabFocusChangeListener listener) {
@@ -66,6 +67,15 @@ public class DTitleTabManager extends VerticalFieldManager {
 	protected void onFocus(int direction) {
 		super.onFocus(direction);
 		listener.onTabFocus();
+		
+		if (direction != 0)
+			for (int i = 0; i < tabs.getFieldCount(); i++) {
+				DTitleTab tab = (DTitleTab) tabs.getField(i);
+				if (tab.getStatus() == true && tab.isFocus() == false) {
+					tab.setFocus();
+					break;
+				}
+			}
 	}
 	
 	protected void onUnfocus() {
@@ -75,8 +85,11 @@ public class DTitleTabManager extends VerticalFieldManager {
 	
 	public class DTitleTab extends DToggleButtonField{
 		private final DTabContent content;
-		public DTitleTab(Bitmap icon, Bitmap icon_on, DTabContent content) {
+		private final String title;
+		
+		public DTitleTab(String title, Bitmap icon, Bitmap icon_on, DTabContent content) {
 			super(icon, icon, icon_on, icon_on);
+			this.title = title;
 			this.content = content;
 			
 			this.action = new Runnable() {
@@ -100,6 +113,10 @@ public class DTitleTabManager extends VerticalFieldManager {
 			if (DTitleTabManager.this.listener != null) {
 				DTitleTabManager.this.listener.onTabFocusChanged(this);
 			}
+		}
+
+		public String getTitle() {
+			return title;
 		}
 	}
 }

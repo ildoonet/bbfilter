@@ -1,6 +1,6 @@
-package net.ildoo.app;
+package com.dabinci.utils;
 
-public class TimerLogger {
+public class DLogger {
 	private static final long FLUSH_INTERVAL = 100;
 	
 	private static long time;

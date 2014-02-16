@@ -77,9 +77,14 @@ public class DBitmapButtonField extends DBaseButtonField {
 		return _bitmaps[NORMAL].getHeight();
 	}
 
-	protected void layout(int width, int height) {
+	protected void layout(int maxwidth, int maxheight) {
 		if (_bitmaps[NORMAL] != null) {
-			setExtent(_bitmaps[NORMAL].getWidth(), _bitmaps[NORMAL].getHeight());
+			int finalWidth = _bitmaps[NORMAL].getWidth();
+			
+			if ((getStyle() & Field.USE_ALL_WIDTH) > 0)
+				finalWidth = maxwidth;
+			
+			setExtent(finalWidth, _bitmaps[NORMAL].getHeight());
 		}
 	}
 	
@@ -96,7 +101,12 @@ public class DBitmapButtonField extends DBaseButtonField {
 
 	protected void paint(Graphics g) {
 		Bitmap bitmap = getIconBitmap(g);
-		g.drawBitmap(0, 0, bitmap.getWidth(), bitmap.getHeight(), bitmap, 0, 0);
+		g.drawBitmap(
+				(getWidth() - bitmap.getWidth()) / 2, 
+				0, 
+				bitmap.getWidth(), 
+				bitmap.getHeight(), 
+				bitmap, 0, 0);
 	}
 	
 	protected Bitmap getIconBitmap(Graphics g) {

@@ -4,7 +4,9 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.container.MainScreen;
+import net.rim.device.api.ui.decor.BackgroundFactory;
 
+import com.dabinci.ui.DColor;
 import com.dabinci.ui.DResolution;
 import com.dabinci.ui.tab.DTabToolTipManager;
 import com.dabinci.ui.tab.DTitleTabManager;
@@ -17,24 +19,29 @@ public class MainTabScreen extends MainScreen implements TabFocusChangeListener{
 	
 	public MainTabScreen() {
 		super(Manager.NO_HORIZONTAL_SCROLL | Manager.NO_VERTICAL_SCROLL);
+		getMainManager().setBackground(BackgroundFactory.createSolidBackground(DColor.getColor(DColor.COLOR_BG_GREY)));
 		
 		DTitleTabManager titleTabs = new DTitleTabManager();
 		titleTabs.addTab(
+				"Gallery",
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_gallery_off.png")),
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_gallery.png")), 
 				new TabGallery());
 		titleTabs.addTab(
+				"My Filters",
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_filters_off.png")),
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_filters.png")), 
-				new TabGallery());
+				new TabFilters());
 		titleTabs.addTab(
+				"Filter Store",
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_store_off.png")),
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_store.png")), 
-				new TabGallery());
+				new TabStore());
 		titleTabs.addTab(
+				"Settings",
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_settings_off.png")),
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_settings.png")), 
-				new TabGallery());
+				new TabSettings());
 		titleTabs.setTab(0);
 		titleTabs.setTabChangeListener(this);
 		setTitle(titleTabs);
@@ -52,7 +59,7 @@ public class MainTabScreen extends MainScreen implements TabFocusChangeListener{
 		}
 
 		tooltipManager.onToolTip(false);
-		tooltipManager.getToolTipField().setToolTip("aaaaaaa", left + tab.getWidth() / 2, tab.getHeight());
+		tooltipManager.getToolTipField().setToolTip(tab.getTitle(), left + tab.getWidth() / 2, tab.getHeight());
 		tooltipManager.onToolTip(true);
 	}
 	

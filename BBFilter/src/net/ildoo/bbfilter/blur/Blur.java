@@ -1,6 +1,7 @@
 package net.ildoo.bbfilter.blur;
 
-import net.ildoo.app.TimerLogger;
+import com.dabinci.utils.DLogger;
+
 import net.rim.device.api.system.Bitmap;
 
 public class Blur {
@@ -15,7 +16,7 @@ public class Blur {
 		int h = sentBitmap.getHeight();
 
 		int[] pix = new int[w * h];
-		TimerLogger.log(TAG, "pix " + w + " " + h + " " + pix.length);
+		DLogger.log(TAG, "pix " + w + " " + h + " " + pix.length);
 		sentBitmap.getARGB(pix, 0, w, 0, 0, w, h);
 
 		int wm = w - 1;

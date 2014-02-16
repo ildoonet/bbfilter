@@ -10,15 +10,18 @@ import net.rim.device.api.ui.decor.BorderFactory;
 
 import com.dabinci.ui.DResolution;
 import com.dabinci.ui.manager.DBorderManager;
+import com.dabinci.ui.wait.ProgressAnimationField;
 
 public class DTabToolTipManager extends Manager {
 
 	private final Manager contents;
 	private final DTabToolTipField tooltip;
+	private final ProgressAnimationField progress;
 	
 	public DTabToolTipManager(Manager contents){
 		super(0l);
 		tooltip = new DTabToolTipField();
+		progress = new ProgressAnimationField(0l);
 		
 		add(this.contents = contents);
 	}
@@ -32,6 +35,13 @@ public class DTabToolTipManager extends Manager {
 		if (tooltip.getManager() == this && tooltip.isToolTipOn()) {
 			layoutChild(tooltip, width, height);
 			setPositionChild(tooltip, tooltip.getParentX() - tooltip.getWidth() / 2, 0);
+		}
+		
+		if (progress.getManager() == this) {
+			layoutChild(progress, width, height);
+			setPositionChild(progress, 
+					(getWidth() - progress.getWidth()) / 2, 
+					(getHeight() - progress.getHeight()) / 2);
 		}
 	}
 	
@@ -47,6 +57,18 @@ public class DTabToolTipManager extends Manager {
 		} else {
 			if (tooltip.getManager() == this)
 				delete(tooltip);
+		}
+	}
+	
+	public void startWaitingDialog() {
+		if (progress.getManager() == null) {
+			add(progress);
+		}
+	}
+	
+	public void stopWaitingDialog() {
+		if (progress.getManager() == this) {
+			delete(progress);
 		}
 	}
 	

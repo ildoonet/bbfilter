@@ -1,5 +1,7 @@
 package net.ildoo.app;
 
+import com.dabinci.utils.DLogger;
+
 import net.ildoo.bbfilter.FilterListener;
 import net.ildoo.bbfilter.FilterManager;
 import net.ildoo.bbfilter.FilteredBitmap;
@@ -38,9 +40,9 @@ public final class FilterScreen extends MainScreen
 			public void run() {
 		        Bitmap bitmap = Bitmap.getBitmapResource("testpic.jpg");
 		        
-		        TimerLogger.tlog(TAG, "start");
+		        DLogger.tlog(TAG, "start");
 		        ffm.add(new BitmapField(bitmap));
-		        TimerLogger.tlog(TAG, "original end");
+		        DLogger.tlog(TAG, "original end");
 
 		        filterManager.requestThumbs(bitmap, filterManager.getFilterGroup(0));
 		        filterManager.requestBlurredBacgkround(bitmap, getMainManager());
@@ -50,13 +52,13 @@ public final class FilterScreen extends MainScreen
     
     FilterListener listener = new FilterListener() {
 		public void onThumbnailed(FilteredBitmap[] thumbs) {
-			TimerLogger.log(TAG, "onThumbnailed()+");
+			DLogger.log(TAG, "onThumbnailed()+");
 			for (int i = 0; i < thumbs.length; i++) {
 				ffm.add(new BitmapField((
 						thumbs[i].getFilterBitmap()
 					)));
 			}
-			TimerLogger.log(TAG, "onThumbnailed()-");
+			DLogger.log(TAG, "onThumbnailed()-");
 		}
 		
 		public void onFiltered(Bitmap bitmap) {
@@ -64,18 +66,18 @@ public final class FilterScreen extends MainScreen
 		}
 		
 		public void onBlurred(Bitmap bitmap, Field field) {
-			TimerLogger.log(TAG, "onBlurred()+");
+			DLogger.log(TAG, "onBlurred()+");
 			if (field != null)
 				field.setBackground(BackgroundFactory.createBitmapBackground(bitmap, Background.POSITION_X_LEFT, Background.POSITION_Y_TOP, Background.REPEAT_SCALE_TO_FIT));
-			TimerLogger.log(TAG, "onBlurred()-");
+			DLogger.log(TAG, "onBlurred()-");
 		}
 		
 		public void onProgressChanged(float percentage) {
-			TimerLogger.log(TAG, "onProgressChanged()+ " + percentage);
+			DLogger.log(TAG, "onProgressChanged()+ " + percentage);
 		}
 		
 		public void onFilterFail() {
-			TimerLogger.log(TAG, "onFilterFail()+");
+			DLogger.log(TAG, "onFilterFail()+");
 		}
 	};
 
