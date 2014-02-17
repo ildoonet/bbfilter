@@ -53,6 +53,7 @@ public class FilterSelector extends DMainScreen {
 			DLogger.log(TAG, "onThumbnailed()+");
 			tooltipManager.stopWaitingDialog();
 			
+			manager.getThumbnailManager().deleteAll();
 			for (int i = 0; i < thumbs.length; i ++) {
 				BitmapField bf = new BitmapField(thumbs[i].getFilterBitmap());
 				manager.getThumbnailManager().add(bf);
