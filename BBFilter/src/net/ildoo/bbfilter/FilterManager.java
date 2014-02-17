@@ -2,8 +2,6 @@ package net.ildoo.bbfilter;
 
 import java.util.Vector;
 
-import com.dabinci.utils.DLogger;
-
 import net.ildoo.bbfilter.blur.Blur;
 import net.ildoo.bbfilter.filter.Filter;
 import net.ildoo.bbfilter.filter.FilterGroup;
@@ -20,13 +18,15 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
 
+import com.dabinci.utils.DLogger;
+
 public class FilterManager {
 	private static final String TAG = "FilterManager";
 	private static final int THUMBW = 100;
 	private static final int THUMBH = 100;
 	private static FilterGroup[] filterGroups;
 	
-	{
+	static {
 		filterGroups = new FilterGroup[] {
 				new FilterGroupCalm(),
 				new FilterGroupClassic(),
@@ -39,19 +39,19 @@ public class FilterManager {
 				new FilterGroupWhitecat(),
 		};
 	}
+
+	public static FilterGroup[] getAllFilterGroup() {
+		return filterGroups;
+	}
+	
+	public static FilterGroup getFilterGroup(final int idx) {
+		return filterGroups[idx];
+	}
 	
 	private final FilterListener listener;
 	
 	public FilterManager(final FilterListener listener) {
 		this.listener = listener;
-	}
-	
-	public FilterGroup[] getAllFilterGroup() {
-		return filterGroups;
-	}
-	
-	public FilterGroup getFilterGroup(final int idx) {
-		return filterGroups[idx];
 	}
 	
 	public void requestThumbs(final Bitmap bitmap, final FilterGroup filterGroup) {

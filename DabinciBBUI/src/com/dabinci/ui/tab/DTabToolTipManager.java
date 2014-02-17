@@ -18,6 +18,8 @@ public class DTabToolTipManager extends Manager {
 	private final DTabToolTipField tooltip;
 	private final ProgressAnimationField progress;
 	
+	private volatile int waitCnt;
+	
 	public DTabToolTipManager(Manager contents){
 		super(0l);
 		tooltip = new DTabToolTipField();
@@ -61,14 +63,26 @@ public class DTabToolTipManager extends Manager {
 	}
 	
 	public void startWaitingDialog() {
+		startWaitingDialog(1);
+	}
+	
+	public void startWaitingDialog(int waitCnt) {
 		if (progress.getManager() == null) {
 			add(progress);
 		}
+		
+		this.waitCnt += waitCnt;
 	}
 	
 	public void stopWaitingDialog() {
-		if (progress.getManager() == this) {
-			delete(progress);
+		waitCnt--;
+		
+		if (waitCnt <= 0) {
+			waitCnt = 0;
+			
+			if (progress.getManager() == this) {
+				delete(progress);
+			}
 		}
 	}
 	
