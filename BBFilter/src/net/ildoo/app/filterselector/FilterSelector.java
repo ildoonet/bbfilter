@@ -3,15 +3,17 @@ package net.ildoo.app.filterselector;
 import net.ildoo.bbfilter.FilterListener;
 import net.ildoo.bbfilter.FilterManager;
 import net.ildoo.bbfilter.FilteredBitmap;
+import net.ildoo.bbfilter.filter.Filter;
 import net.ildoo.bbfilter.filter.FilterGroup;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Manager;
-import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.decor.Background;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
+import com.dabinci.ui.button.DTextOnBitmapToggleButtonField;
+import com.dabinci.ui.button.DTextOnBitmapToggleButtonField.onChangeToggleStatus;
 import com.dabinci.ui.screen.DMainScreen;
 import com.dabinci.ui.tab.DTabToolTipManager;
 import com.dabinci.utils.DLogger;
@@ -22,6 +24,7 @@ public class FilterSelector extends DMainScreen {
 	private final DTabToolTipManager tooltipManager;
 	private final FilterSelectorField manager;
 	
+	private final Bitmap bitmap;
 	private final FilterManager filterManager;
 	private final FilterGroup filterGroup;
 	
@@ -30,6 +33,7 @@ public class FilterSelector extends DMainScreen {
 		setTitle(title);
 		setBackground(Color.BLACK);
 		
+		this.bitmap = bitmap;
 		this.filterGroup = filterGroup;
 
 		filterManager = new FilterManager(filterListener);
@@ -46,17 +50,39 @@ public class FilterSelector extends DMainScreen {
 	
 	FilterListener filterListener = new FilterListener() {
 		public void onFiltered(Bitmap bitmap) {
-			
+			DLogger.log(TAG, "onFiltered()+");
+			manager.setBitmap(bitmap);
+			tooltipManager.stopWaitingDialog();
+			DLogger.log(TAG, "onFiltered()-");
 		}
 
-		public void onThumbnailed(FilteredBitmap[] thumbs) {
+		public void onThumbnailed(Bitmap original, final FilteredBitmap[] thumbs) {
 			DLogger.log(TAG, "onThumbnailed()+");
 			tooltipManager.stopWaitingDialog();
 			
 			manager.getThumbnailManager().deleteAll();
+			DTextOnBitmapToggleButtonField btnOriginal = new DTextOnBitmapToggleButtonField("", original);
+			btnOriginal.setToggleListener(new onChangeToggleStatus() {
+				public void onChangeToggleStatus(boolean toggled) {
+					manager.setBitmap(FilterSelector.this.bitmap);
+				}
+			});
+			manager.getThumbnailManager().add(btnOriginal);
+			
 			for (int i = 0; i < thumbs.length; i ++) {
-				BitmapField bf = new BitmapField(thumbs[i].getFilterBitmap());
-				manager.getThumbnailManager().add(bf);
+				final FilteredBitmap filterInfo = thumbs[i];
+				DTextOnBitmapToggleButtonField btn = new DTextOnBitmapToggleButtonField("CL1", filterInfo.getFilterBitmap());
+				btn.setToggleListener(new onChangeToggleStatus() {
+					public void onChangeToggleStatus(boolean toggled) {
+						try {
+							tooltipManager.startWaitingDialog();
+							filterManager.requestFilter(FilterSelector.this.bitmap, (Filter) filterInfo.getFilterClass().newInstance());
+						} catch (Exception e) { 
+							DLogger.log(TAG, "onChangeToggleStatus e=" + e.toString());
+						}
+					}
+				});
+				manager.getThumbnailManager().add(btn);
 			}
 			
 			DLogger.log(TAG, "onThumbnailed()-");

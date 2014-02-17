@@ -51,7 +51,7 @@ public final class FilterScreen extends MainScreen
     }
     
     FilterListener listener = new FilterListener() {
-		public void onThumbnailed(FilteredBitmap[] thumbs) {
+		public void onThumbnailed(Bitmap original, FilteredBitmap[] thumbs) {
 			DLogger.log(TAG, "onThumbnailed()+");
 			for (int i = 0; i < thumbs.length; i++) {
 				ffm.add(new BitmapField((

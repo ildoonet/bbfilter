@@ -86,6 +86,20 @@ public class DTabToolTipManager extends Manager {
 		}
 	}
 	
+	protected boolean navigationClick(int status, int time) {
+		if (waitCnt > 0)
+			return true;
+		
+		return super.navigationClick(status, time);
+	}
+	
+	protected boolean navigationMovement(int dx, int dy, int status, int time) {
+		if (waitCnt > 0)
+			return true;
+		
+		return super.navigationMovement(dx, dy, status, time);
+	}
+	
 	public static class DTabToolTipField extends DBorderManager {
 		private static Border border;
 		

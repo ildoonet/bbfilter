@@ -36,9 +36,9 @@ public class DTextButtonField extends DBaseButtonField {
 
 
 	private String text;
-	private int textColor;
+	protected int textColor;
 	private final int borderColor;
-	private int preferredHeight;
+	protected int preferredHeight;
 	private int preferredHorizontalPadding;
 	
 	private Runnable action;

@@ -69,7 +69,7 @@ public class FilterManager {
 					return;
 				}
 				
-				Bitmap smallBitmap = new Bitmap(THUMBW, THUMBH);
+				final Bitmap smallBitmap = new Bitmap(THUMBW, THUMBH);
 				bitmap.scaleInto(smallBitmap, Bitmap.FILTER_LANCZOS, Bitmap.SCALE_TO_FILL);
 				
 				for (int i = 0; i < filters.length; i++) {
@@ -106,7 +106,7 @@ public class FilterManager {
 				
 				UiApplication.getUiApplication().invokeLater(new Runnable() {
 					public void run() {
-						listener.onThumbnailed(filteredBitmaps);
+						listener.onThumbnailed(smallBitmap, filteredBitmaps);
 					}
 				});
 				
@@ -142,6 +142,16 @@ public class FilterManager {
 	}
 	
 	public void requestFilter(final Bitmap bitmap, final Filter filter) {
-		
+		Thread worker = new FilterThread() {
+			public void run() {
+				final Bitmap filtered = filter.filtering(bitmap);
+				UiApplication.getUiApplication().invokeLater(new Runnable() {
+					public void run() {
+						listener.onFiltered(filtered);
+					}
+				});
+			}
+		};
+		worker.start();
 	}
 }
