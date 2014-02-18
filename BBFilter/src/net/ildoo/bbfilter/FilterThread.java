@@ -21,6 +21,7 @@ public class FilterThread extends Thread {
 	
 	public void cancel() {
 		this.isCanceled = true;
+		this.interrupt();
 	}
 	
 	public boolean isCanceled() {

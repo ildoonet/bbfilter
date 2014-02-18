@@ -155,4 +155,9 @@ public class FilterManager {
 		};
 		worker.start();
 	}
+	
+	public void cancelAll() {
+		FilterThread.getCurrentWorker().cancel();
+		FilterThread.getCurrentWorker().interrupt();
+	}
 }
