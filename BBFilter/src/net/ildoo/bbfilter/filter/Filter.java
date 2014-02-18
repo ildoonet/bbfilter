@@ -18,6 +18,20 @@ public abstract class Filter {
 		
 		if (getTransformMatrix() != null) {
 			cm.set(getTransformMatrix());
+			
+			if (getBrightness() != 1.0f) {
+				float f = getBrightness();
+				
+				ColorMatrix cm2 = new ColorMatrix();
+				cm2.set(new float[] {
+					f, 0, 0, 0, 0,
+					0, f, 0, 0, 0,
+					0, 0, f, 0, 0,
+					0, 0, 0, 1, 0
+				});
+				cm.preConcat(cm2);
+			}
+			
 			run(cm, argbs);
 		}
 		
@@ -29,17 +43,6 @@ public abstract class Filter {
 		if (getGradient(bitmap.getWidth(), bitmap.getHeight()) != null) {
 			Gradient g = getGradient(bitmap.getWidth(), bitmap.getHeight());
 			g.gradient(argbs, bitmap.getWidth(), bitmap.getHeight());
-		}
-		
-		if (getBrightness() != 1.0f) {
-			float f = getBrightness();
-			cm.set(new float[] {
-				f, 0, 0, 0, 0,
-				0, f, 0, 0, 0,
-				0, 0, f, 0, 0,
-				0, 0, 0, 1, 0
-			});
-			run(cm, argbs);
 		}
 		
 		// generate bitmap object
