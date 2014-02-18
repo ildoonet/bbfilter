@@ -18,12 +18,13 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
 
+import com.dabinci.ui.DResolution;
 import com.dabinci.utils.DLogger;
 
 public class FilterManager {
 	private static final String TAG = "FilterManager";
-	private static final int THUMBW = 100;
-	private static final int THUMBH = 100;
+	private static final int THUMBW = DResolution.getPixel(75);
+	private static final int THUMBH = DResolution.getPixel(75);
 	private static FilterGroup[] filterGroups;
 	
 	static {
@@ -128,7 +129,7 @@ public class FilterManager {
 				Bitmap resized = new Bitmap(width, height);
 				bitmap.scaleInto(resized, Bitmap.FILTER_BOX, Bitmap.SCALE_TO_FILL);
 				
-				final Bitmap blurred = Blur.fastblur(resized, 40);
+				final Bitmap blurred = Blur.fastblur(resized, 20);
 				
 				UiApplication.getUiApplication().invokeLater(new Runnable() {
 					public void run() {

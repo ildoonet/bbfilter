@@ -1,8 +1,8 @@
 package net.ildoo.bbfilter.blur;
 
-import com.dabinci.utils.DLogger;
-
 import net.rim.device.api.system.Bitmap;
+
+import com.dabinci.utils.DLogger;
 
 public class Blur {
 	private static final String TAG = "Blur";
@@ -12,12 +12,15 @@ public class Blur {
 			return (null);
 		}
 
-		int w = sentBitmap.getWidth();
-		int h = sentBitmap.getHeight();
-
+		Bitmap half = new Bitmap(sentBitmap.getWidth() / 3, sentBitmap.getHeight() / 3);
+		sentBitmap.scaleInto(half, Bitmap.FILTER_BOX);
+		
+		int w = half.getWidth();
+		int h = half.getHeight();
+		
 		int[] pix = new int[w * h];
 		DLogger.log(TAG, "pix " + w + " " + h + " " + pix.length);
-		sentBitmap.getARGB(pix, 0, w, 0, 0, w, h);
+		half.getARGB(pix, 0, w, 0, 0, w, h);
 
 		int wm = w - 1;
 		int hm = h - 1;
@@ -204,7 +207,11 @@ public class Blur {
 
 		Bitmap bitmap = new Bitmap(w, h);
 		bitmap.setARGB(pix, 0, w, 0, 0, w, h);
-		return (bitmap);
+		
+		Bitmap doubled = new Bitmap(sentBitmap.getWidth(), sentBitmap.getHeight());
+		bitmap.scaleInto(doubled, Bitmap.FILTER_BOX);
+		
+		return (doubled);
 	}
 
 }

@@ -35,7 +35,6 @@ package net.ildoo.bbfilter.filter;
  *   A' = p*R + q*G + r*B + s*A + t;
  */
 public class ColorMatrix {
-
     private final float[] mArray = new float[20];
 
     /**
@@ -65,24 +64,31 @@ public class ColorMatrix {
      */
     public final float[] getArray() { return mArray; }
     
+    private int prevArgb = 0;
+    private int prevColor = 0;
+    
     public final int getColor(final int argb) {
+    	if (argb == prevArgb)
+    		return prevColor;
+    	
 		final int nRed = (argb >> 16 ) & 0xff;
         final int nGreen = (argb >> 8 ) & 0xff;
         final int nBlue = (argb & 0xff);
-        final int nAlpha = (argb >> 24) & 0xff;
         
-        final int[] filtered = new int[4];
-		for (int i = 0; i < 4; i++) {
+        final int[] filtered = new int[3];
+		for (int i = 0; i < 3; i++) {
 			final int ROW = i * 5;
-	        filtered[i] = bound((int)(vector_inner_product(mArray[ROW + 0], mArray[ROW + 1], mArray[ROW + 2], mArray[ROW + 3], mArray[ROW + 4], nRed, nGreen, nBlue, nAlpha, 1)), 
+	        filtered[i] = bound(
+	        		vector_inner_product(mArray[ROW + 0], mArray[ROW + 1], mArray[ROW + 2], mArray[ROW + 4], nRed, nGreen, nBlue, 1), 
 	        		0 , 255);
 		}
 
-        return filtered[2] | (filtered[1]<<8) | (filtered[0]<<16) | (filtered[3]<<24);
+		prevArgb = argb;
+        return prevColor = filtered[2] | (filtered[1]<<8) | (filtered[0]<<16) | 0xff000000;
     }
     
-    private final static int vector_inner_product(float v1, float v2, float v3, float v4, float v5, int w1, int w2, int w3, int w4, int w5) {
-    	return (int) (v1 * w1 + v2 * w2 + v3 * w3 + v4 * w4 + v5 * w5);
+    private final static int vector_inner_product(float v1, float v2, float v3, float v4, int w1, int w2, int w3, int w4) {
+    	return (int) (v1 * w1 + v2 * w2 + v3 * w3 + v4 * w4);
     }
     
     private final int bound(int value, int min, int max) {
