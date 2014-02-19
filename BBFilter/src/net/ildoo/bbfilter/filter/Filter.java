@@ -1,14 +1,22 @@
 package net.ildoo.bbfilter.filter;
 
+import net.ildoo.bbfilter.FilterCache;
 import net.ildoo.bbfilter.gradient.Gradient;
 import net.rim.device.api.system.Bitmap;
 
 public abstract class Filter {
+	private static final String TAG = "Filter";
 	protected abstract float[] getTransformMatrix();
 
-	public Bitmap filtering(final Bitmap bitmap) {
+	public Bitmap filtering(final Bitmap bitmap, final boolean saveToCache) {
 		if (bitmap == null)
 			throw new IllegalArgumentException("Bitmap argument can not be null.");
+		
+		if (saveToCache == true && FilterCache.getInstance().containsKey(this.getClass().getName())) {
+			Bitmap cached = (Bitmap) FilterCache.getInstance().get(this.getClass().getName());
+			if (cached != null)
+				return cached;
+		}
 		
 		final int[] argbs = new int[bitmap.getWidth() * bitmap.getHeight()];
 		bitmap.getARGB(argbs, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
@@ -48,6 +56,10 @@ public abstract class Filter {
 		// generate bitmap object
 		final Bitmap revised = new Bitmap(bitmap.getWidth(), bitmap.getHeight());
 		revised.setARGB(argbs, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+		
+		if (saveToCache) {
+			FilterCache.getInstance().put(this.getClass().getName(), revised);
+		}
 		
 		return revised;
 	}

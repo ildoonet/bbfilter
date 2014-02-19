@@ -96,7 +96,7 @@ public class FilterManager {
 						
 						FilteredBitmap fb = new FilteredBitmap();
 						fb.setFilterClass(filters[i]);
-						fb.setFilterBitmap(f.filtering(smallBitmap));
+						fb.setFilterBitmap(f.filtering(smallBitmap, false));
 						
 						vector.addElement(fb);
 						
@@ -158,7 +158,7 @@ public class FilterManager {
 	public void requestFilter(final Bitmap bitmap, final Filter filter) {
 		Thread worker = new FilterThread() {
 			public void run() {
-				final Bitmap filtered = filter.filtering(bitmap);
+				final Bitmap filtered = filter.filtering(bitmap, true);
 				UiApplication.getUiApplication().invokeLater(new Runnable() {
 					public void run() {
 						listener.onFiltered(filtered);

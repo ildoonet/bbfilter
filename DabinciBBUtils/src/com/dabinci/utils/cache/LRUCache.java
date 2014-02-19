@@ -4,6 +4,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import com.dabinci.utils.DLogger;
+
 /*
  *  Licensed to the Apache Software Foundation (ASF) under one or more
  *  contributor license agreements.  See the NOTICE file distributed with
@@ -83,6 +85,9 @@ public class LRUCache {
 		node.value = value;
 		node.key = key;
 		moveToHead(node);
+		
+		if (value != null)
+			DLogger.log("LRUCache", "put " + key.toString() + ", " + value.toString());
 	}
 
 	public synchronized Object remove(Object key) {

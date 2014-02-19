@@ -12,6 +12,10 @@ public abstract class FilterGroup {
 	public abstract void initGroup();
 	public abstract String getGroupName();
 	
+	public Bitmap getTitleBitmap() {
+		return Bitmap.getBitmapResource("sample1.jpg");
+	}
+	
 	public Bitmap getSampleBitmap() {
 		return Bitmap.getBitmapResource("sample1.jpg");
 	}
