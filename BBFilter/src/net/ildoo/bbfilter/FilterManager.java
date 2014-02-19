@@ -41,12 +41,25 @@ public class FilterManager {
 		};
 	}
 
-	public static FilterGroup[] getAllFilterGroup() {
+	public static FilterGroup[] getAllFilterGroups() {
 		return filterGroups;
 	}
 	
 	public static FilterGroup getFilterGroup(final int idx) {
 		return filterGroups[idx];
+	}
+	
+	public static FilterGroup[] getPurchasedFilterGroups() {
+		Vector purchased = new Vector();
+		for (int i = 0; i < filterGroups.length; i++) {
+			if (filterGroups[i].isPurchased())
+				purchased.addElement(filterGroups[i]);
+		}
+		
+		FilterGroup[] purchasedArr = new FilterGroup[purchased.size()];
+		purchased.copyInto(purchasedArr);
+		
+		return purchasedArr;
 	}
 	
 	private final FilterListener listener;

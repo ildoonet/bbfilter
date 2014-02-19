@@ -14,5 +14,4 @@ public class FilterGroupCalm extends FilterGroup {
 	public String getGroupName() {
 		return "calm".toUpperCase();
 	}
-
 }

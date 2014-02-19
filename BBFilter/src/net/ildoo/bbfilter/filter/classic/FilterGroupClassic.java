@@ -13,7 +13,7 @@ public class FilterGroupClassic extends FilterGroup {
 	}
 
 	public String getGroupName() {
-		return "class".toUpperCase();
+		return "classic".toUpperCase();
 	}
 
 }
