@@ -41,7 +41,7 @@ public class MainTabScreen extends MainScreen implements TabFocusChangeListener{
 				"Settings",
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_settings_off.png")),
 				DResolution.getBitmap(Bitmap.getBitmapResource("tab_settings.png")), 
-				new TabSettings());
+				new TabSettings(), true);
 		titleTabs.setTab(0);
 		titleTabs.setTabChangeListener(this);
 		setTitle(titleTabs);

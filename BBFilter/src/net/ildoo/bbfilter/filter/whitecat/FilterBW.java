@@ -13,4 +13,8 @@ public class FilterBW extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "WC1";
+	}
+
 }

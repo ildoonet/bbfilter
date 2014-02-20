@@ -12,4 +12,8 @@ public class FilterCool extends Filter {
 			0f, 0f, 0f, 1f, 0f
 		};
 	}
+
+	public String getName() {
+		return "CL2";
+	}
 }

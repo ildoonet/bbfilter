@@ -10,4 +10,8 @@ public class FilterWornBottomGradient extends FilterWorn {
 		lg.setXY(XY.create(0, height), XY.create(0, 0));
 		return lg;
 	}
+	
+	public String getName() {
+		return "WB1";
+	}
 }

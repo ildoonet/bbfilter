@@ -13,4 +13,8 @@ public class FilterSepia extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "SE1";
+	}
+
 }

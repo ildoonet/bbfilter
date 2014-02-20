@@ -13,4 +13,8 @@ public class FilterToy extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "T1";
+	}
+
 }

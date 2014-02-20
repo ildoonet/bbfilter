@@ -95,6 +95,7 @@ public class FilterManager {
 						Filter f = (Filter) filters[i].newInstance();
 						
 						FilteredBitmap fb = new FilteredBitmap();
+						fb.setFilterName(f.getName());
 						fb.setFilterClass(filters[i]);
 						fb.setFilterBitmap(f.filtering(smallBitmap, false));
 						

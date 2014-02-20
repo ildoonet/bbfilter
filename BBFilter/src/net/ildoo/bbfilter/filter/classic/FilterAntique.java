@@ -13,4 +13,8 @@ public class FilterAntique extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "CL1";
+	}
+
 }

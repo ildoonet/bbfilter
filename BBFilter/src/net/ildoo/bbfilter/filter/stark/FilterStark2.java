@@ -18,4 +18,8 @@ public class FilterStark2 extends Filter {
 	protected float getBrightness() {
 		return 1.8f;
 	}
+
+	public String getName() {
+		return "ST2";
+	}
 }

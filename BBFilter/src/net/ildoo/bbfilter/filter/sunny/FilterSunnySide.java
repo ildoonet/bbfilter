@@ -12,4 +12,8 @@ public class FilterSunnySide extends Filter {
                 0, 0, 0, 1, 0 };
 	}
 
+	public String getName() {
+		return "SS1";
+	}
+
 }

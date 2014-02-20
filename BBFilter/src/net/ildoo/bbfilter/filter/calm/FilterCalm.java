@@ -13,4 +13,8 @@ public class FilterCalm extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "C1";
+	}
+
 }

@@ -13,4 +13,8 @@ public class FilterSunrise extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "C2";
+	}
+
 }

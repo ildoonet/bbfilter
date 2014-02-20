@@ -13,4 +13,8 @@ public class FilterWhiteCat extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "WC2";
+	}
+
 }

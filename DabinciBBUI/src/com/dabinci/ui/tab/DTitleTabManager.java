@@ -30,7 +30,24 @@ public class DTitleTabManager extends VerticalFieldManager {
 	}
 	
 	public void addTab(String title, Bitmap icon, Bitmap icon_on, DTabContent content) {
-		DTitleTab tab = new DTitleTab(title, icon, icon_on, content);
+		addTab(title, icon, icon_on, content, false);
+	}
+	
+	public void addTab(String title, Bitmap icon, Bitmap icon_on, DTabContent content, boolean lastTab) {
+		DTitleTab tab = null;
+		if (lastTab == false) {
+			tab = new DTitleTab(title, icon, icon_on, content);
+		} else {
+			tab = new DTitleTab(title, icon, icon_on, content) {
+				protected boolean navigationMovement(int dx, int dy, int status, int time) {
+					if (dx > 0)
+						return true;
+					
+					return super.navigationMovement(dx, dy, status, time);
+				};
+			};
+		}
+		
 		tab.setPadding(new XYEdges(
 				DResolution.getPixel(3),
 				DResolution.getPixel(25),

@@ -3,11 +3,13 @@ package com.dabinci.ui.button;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.decor.Background;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
 import com.dabinci.ui.DColor;
+import com.dabinci.ui.DResolution;
 
 public class DTextOnBitmapToggleButtonField extends DTextButtonField {
 
@@ -29,10 +31,19 @@ public class DTextOnBitmapToggleButtonField extends DTextButtonField {
 		
 		setBackground(Field.VISUAL_STATE_FOCUS, BackgroundFactory.createSolidBackground(DColor.getColor(DColor.COLOR_SELECTED_BG)));
 		setHeight(bg.getHeight());
+		setFontSize(DResolution.getFontHeight(16));
 	}
 
 	protected void layout(int maxWidth, int maxHeight) {
 		super.layout(bg.getWidth(), bg.getHeight());
+	}
+	
+	protected void paint(Graphics graphics) {
+		if (toggled == false)
+			super.paint(graphics);
+		else {
+			paintBackground(graphics);
+		}
 	}
 	
 	protected boolean navigationClick(int status, int time) {

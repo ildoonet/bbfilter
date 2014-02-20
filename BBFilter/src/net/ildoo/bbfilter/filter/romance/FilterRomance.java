@@ -13,4 +13,8 @@ public class FilterRomance extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "R2";
+	}
+
 }

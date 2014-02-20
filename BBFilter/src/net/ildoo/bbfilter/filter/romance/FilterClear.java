@@ -13,4 +13,8 @@ public class FilterClear extends Filter {
 		};
 	}
 
+	public String getName() {
+		return "R1";
+	}
+
 }

@@ -104,6 +104,10 @@ public class DTextButtonField extends DBaseButtonField {
 	
 	protected void paint(Graphics graphics) {
 		super.paintBackground(graphics);
+		paintText(graphics);
+	}
+	
+	protected void paintText(Graphics graphics) {
 		int textColor;
 		if (getState() == Field.VISUAL_STATE_NORMAL) {
     		graphics.setColor(borderColor);

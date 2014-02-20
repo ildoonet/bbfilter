@@ -71,7 +71,7 @@ public class FilterSelector extends DMainScreen {
 			
 			for (int i = 0; i < thumbs.length; i ++) {
 				final FilteredBitmap filterInfo = thumbs[i];
-				DTextOnBitmapToggleButtonField btn = new DTextOnBitmapToggleButtonField("CL1", filterInfo.getFilterBitmap());
+				DTextOnBitmapToggleButtonField btn = new DTextOnBitmapToggleButtonField(filterInfo.getFilterName(), filterInfo.getFilterBitmap());
 				btn.setToggleListener(new onChangeToggleStatus() {
 					public void onChangeToggleStatus(boolean toggled) {
 						try {

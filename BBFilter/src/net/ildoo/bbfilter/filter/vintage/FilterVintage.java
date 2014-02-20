@@ -19,4 +19,8 @@ public class FilterVintage extends Filter {
 	protected float getBrightness() {
 		return 1.5f;
 	}
+
+	public String getName() {
+		return "V1";
+	}
 }

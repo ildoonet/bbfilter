@@ -8,6 +8,8 @@ public abstract class Filter {
 	private static final String TAG = "Filter";
 	protected abstract float[] getTransformMatrix();
 
+	public abstract String getName();
+	
 	public Bitmap filtering(final Bitmap bitmap, final boolean saveToCache) {
 		if (bitmap == null)
 			throw new IllegalArgumentException("Bitmap argument can not be null.");

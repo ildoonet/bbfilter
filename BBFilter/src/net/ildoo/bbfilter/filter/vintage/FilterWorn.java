@@ -15,4 +15,8 @@ public class FilterWorn extends Filter {
 	protected float getBrightness() {
 		return 1.2f;
 	}
+
+	public String getName() {
+		return "W1";
+	}
 }
