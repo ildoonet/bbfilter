@@ -31,7 +31,7 @@ public class DTextOnBitmapToggleButtonField extends DTextButtonField {
 		
 		setBackground(Field.VISUAL_STATE_FOCUS, BackgroundFactory.createSolidBackground(DColor.getColor(DColor.COLOR_SELECTED_BG)));
 		setHeight(bg.getHeight());
-		setFontSize(DResolution.getFontHeight(16));
+		setFontSize(DResolution.getFontHeight(18));
 	}
 
 	protected void layout(int maxWidth, int maxHeight) {

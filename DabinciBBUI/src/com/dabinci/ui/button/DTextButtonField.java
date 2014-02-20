@@ -93,7 +93,7 @@ public class DTextButtonField extends DBaseButtonField {
 	}
 	
 	public DTextButtonField setFontSize(int size) {
-		setFont(getFont().derive(getFont().getStyle(), DTextButtonField.TEXT_SIZE_SMALL));
+		setFont(getFont().derive(getFont().getStyle(), size));
 		return this;
 	}
 	
