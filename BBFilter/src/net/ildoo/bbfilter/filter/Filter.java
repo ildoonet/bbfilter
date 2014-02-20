@@ -14,42 +14,43 @@ public abstract class Filter {
 		if (bitmap == null)
 			throw new IllegalArgumentException("Bitmap argument can not be null.");
 		
-		if (saveToCache == true && FilterCache.getInstance().containsKey(this.getClass().getName())) {
-			Bitmap cached = (Bitmap) FilterCache.getInstance().get(this.getClass().getName());
+		if (saveToCache == true && FilterCache.getInstance().containsKey(getName())) {
+			Bitmap cached = (Bitmap) FilterCache.getInstance().get(getName());
 			if (cached != null)
 				return cached;
 		}
 		
 		final int[] argbs = new int[bitmap.getWidth() * bitmap.getHeight()];
-		bitmap.getARGB(argbs, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
-		
-		// apply filter set
+			bitmap.getARGB(argbs, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+
 		final ColorMatrix cm = new ColorMatrix();
-		
 		if (getTransformMatrix() != null) {
 			cm.set(getTransformMatrix());
+		}
 			
-			if (getBrightness() != 1.0f) {
-				float f = getBrightness();
-				
-				ColorMatrix cm2 = new ColorMatrix();
-				cm2.set(new float[] {
-					f, 0, 0, 0, 0,
-					0, f, 0, 0, 0,
-					0, 0, f, 0, 0,
-					0, 0, 0, 1, 0
-				});
-				cm.preConcat(cm2);
-			}
-			
-			run(cm, argbs);
+		// apply other filter sets
+		ColorMatrix cm_bright = null;
+		if (getBrightness() != 1.0f) {
+			float f = getBrightness();
+			cm_bright = new ColorMatrix();
+			cm_bright.set(new float[] {
+				f, 0, 0, 0, 0,
+				0, f, 0, 0, 0,
+				0, 0, f, 0, 0,
+				0, 0, 0, 1, 0
+			});
+			cm.preConcat(cm_bright);
 		}
 		
+		ColorMatrix cm_saturation = null;
 		if (getSaturation() <= 1.0f && getSaturation() > 0) {
-			cm.setSaturation(getSaturation());
-			run(cm, argbs);
+			cm_saturation = new ColorMatrix();
+			cm_saturation.setSaturation(getSaturation());
+			cm.preConcat(cm_saturation);
 		}
-		
+
+		run(cm, argbs);
+
 		if (getGradient(bitmap.getWidth(), bitmap.getHeight()) != null) {
 			Gradient g = getGradient(bitmap.getWidth(), bitmap.getHeight());
 			g.gradient(argbs, bitmap.getWidth(), bitmap.getHeight());
@@ -60,7 +61,7 @@ public abstract class Filter {
 		revised.setARGB(argbs, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
 		
 		if (saveToCache) {
-			FilterCache.getInstance().put(this.getClass().getName(), revised);
+			FilterCache.getInstance().put(getName(), revised);
 		}
 		
 		return revised;
