@@ -4,26 +4,28 @@ import net.ildoo.bbfilter.FilterListener;
 import net.ildoo.bbfilter.FilterManager;
 import net.ildoo.bbfilter.FilteredBitmap;
 import net.rim.device.api.system.Bitmap;
+import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.decor.Background;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
-import com.dabinci.ui.DColor;
 import com.dabinci.ui.screen.DMainScreen;
 import com.dabinci.ui.tab.DTabToolTipManager;
 import com.dabinci.utils.DLogger;
 
-public class FilterBaseScreen extends DMainScreen implements FilterListener {
+abstract class FilterBaseScreen extends DMainScreen implements FilterListener {
 	private final static String TAG = "PreviewScreen";
 	protected final FilterManager filterManager;
 
 	protected final DTabToolTipManager tooltipManager;
 	protected final FilterSelectorField manager;
 	
-	public FilterBaseScreen(String title, Bitmap bitmap, Bitmap blurred) {
+	public FilterBaseScreen(String title, final Bitmap bitmap, Bitmap blurred) {
 		super(Manager.NO_HORIZONTAL_SCROLL | Manager.NO_VERTICAL_SCROLL);
-		getMainManager().setBackground(BackgroundFactory.createSolidBackground(DColor.getColor(DColor.COLOR_BG_GREY)));
+		setTitle(title);
+		setBackground(Color.BLACK);
+//		getMainManager().setBackground(BackgroundFactory.createSolidBackground(DColor.getColor(DColor.COLOR_BG_GREY)));
 	
 		filterManager = new FilterManager(this);
 		if (blurred == null)

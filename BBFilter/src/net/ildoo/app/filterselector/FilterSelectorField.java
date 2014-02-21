@@ -8,8 +8,10 @@ import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 
 import com.dabinci.ui.manager.DCenterManager;
+import com.dabinci.utils.DLogger;
 
 public class FilterSelectorField extends VerticalFieldManager {
+	private final static String TAG = "FilterSelectorField";
 	
 	private final DCenterManager centerManager;
 	private final BitmapField bitmapField;
@@ -43,6 +45,7 @@ public class FilterSelectorField extends VerticalFieldManager {
 	}
 	
 	public void setBitmap(Bitmap bitmap) {
+		DLogger.log(TAG, "setBitmap() +");
 		final int width = (int) (centerManager.getWidth() * 0.9);
 		final int height = (int) (centerManager.getHeight() * 0.8);
 		
@@ -56,5 +59,6 @@ public class FilterSelectorField extends VerticalFieldManager {
 		}
 		
 		bitmapField.setBitmap(resized);
+		DLogger.log(TAG, "setBitmap() -");
 	}
 }

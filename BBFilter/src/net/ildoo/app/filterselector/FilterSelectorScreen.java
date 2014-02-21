@@ -19,7 +19,6 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 	
 	public FilterSelectorScreen(final String title, final Bitmap bitmap, final Bitmap blurred, final FilterGroup filterGroup) {
 		super(title, bitmap, blurred);
-		setTitle(title);
 		setBackground(Color.BLACK);
 		
 		this.bitmap = bitmap;
@@ -65,6 +64,7 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 			manager.getThumbnailManager().add(btn);
 		}
 		
+		btnOriginal.clickButton();
 		DLogger.log(TAG, "onThumbnailed()-");
 	}
 
