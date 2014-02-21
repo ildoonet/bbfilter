@@ -9,12 +9,11 @@ import com.dabinci.ui.tab.DTabContent;
 public class TabFilters extends DTabContent {
 
 	public TabFilters() {
-		setContents();
 	}
 	
 	
 	public void requestRefresh() {
-		
+		setContents();
 	}
 	
 	private void setContents() {
