@@ -7,5 +7,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/BBFilterOS"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/BBFilterOS6"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DabinciBBUtils"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/BBFilterOS7"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

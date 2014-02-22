@@ -5,6 +5,8 @@ import net.rim.device.api.applicationcontrol.ApplicationPermissions;
 import net.rim.device.api.applicationcontrol.ApplicationPermissionsManager;
 import net.rim.device.api.ui.UiApplication;
 
+import com.dabinci.os.DabinciOSUtil;
+
 /**
  * This class extends the UiApplication class, providing a graphical user
  * interface.
@@ -64,6 +66,8 @@ public class FilterApp extends UiApplication {
 			// end if
 		}// end for i
 
+		DabinciOSUtil.getInstance().requestPermission(permissions);
+		
 		try {
 			ApplicationPermissionsManager.getInstance()
 					.invokePermissionsRequest(permissions);
