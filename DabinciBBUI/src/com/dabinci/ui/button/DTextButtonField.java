@@ -27,7 +27,7 @@ public class DTextButtonField extends DBaseButtonField {
 	private final static int COLOR_TEXT_GREY = 0x222222;
 	
 
-	public final static int TEXT_SIZE_NORMAL = DResolution.getFontHeight(30);
+	public final static int TEXT_SIZE_NORMAL = DResolution.getFontHeight(25);
 	public final static int TEXT_SIZE = DResolution.getFontHeight(20);
 	public final static int TEXT_SIZE_SMALL = DResolution.getFontHeight(12);
 	

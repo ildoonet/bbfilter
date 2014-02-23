@@ -21,16 +21,21 @@ public class DCenterManager extends Manager {
 	}
 
 	protected void sublayout(int maxwidth, int maxheight) {
-		setExtent(this.width, this.height);
+		if (this.width != 0 && this.height != 0) {
+			maxwidth = this.width;
+			maxheight = this.height;
+		}
+		
+		setExtent(maxwidth, maxheight);
 		
 		if (getFieldCount() == 0)
 			return;
 		
 		Field f = getField(0);
-		layoutChild(f, width, height);
+		layoutChild(f, maxwidth, maxheight);
 		setPositionChild(f, 
-			(getWidth() - f.getWidth()) / 2,
-			(getHeight() - f.getHeight()) / 2);
+			(maxwidth - f.getWidth()) / 2,
+			(maxheight - f.getHeight()) / 2);
 	}
 
 }

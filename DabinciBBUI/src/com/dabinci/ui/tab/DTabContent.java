@@ -11,7 +11,11 @@ import com.dabinci.ui.DResolution;
 
 public abstract class DTabContent extends VerticalFieldManager {
 	public DTabContent() {
-		super(Manager.USE_ALL_WIDTH | Manager.VERTICAL_SCROLL);
+		this(Manager.USE_ALL_WIDTH | Manager.VERTICAL_SCROLL);
+	}
+	
+	public DTabContent(long style) {
+		super(style);
 
 		requestRefresh();
 	}
