@@ -5,6 +5,7 @@ import net.rim.device.api.applicationcontrol.ApplicationPermissions;
 import net.rim.device.api.applicationcontrol.ApplicationPermissionsManager;
 import net.rim.device.api.ui.UiApplication;
 
+import com.Localytics.LocalyticsSession.LocalyticsSession;
 import com.dabinci.os.DabinciOSUtil;
 
 /**
@@ -12,6 +13,13 @@ import com.dabinci.os.DabinciOSUtil;
  * interface.
  */
 public class FilterApp extends UiApplication {
+	private final static String APPLICATION_KEY = "8dc6380b0b549ff0a44ce32-c7526966-9d1a-11e3-9754-005cf8cbabd8"; 
+    private LocalyticsSession _session = new LocalyticsSession(APPLICATION_KEY);
+	
+    public LocalyticsSession getLocalyticsSession() {
+    	return this._session;
+    }
+    
 	/**
 	 * Entry point for application
 	 * 
@@ -31,6 +39,10 @@ public class FilterApp extends UiApplication {
 	public FilterApp() {
 		// Push a screen onto the UI stack for rendering.
 		setPermission();
+		
+		_session.open();
+		_session.upload();
+		
 		pushScreen(new MainTabScreen());
 	}
 	
@@ -69,9 +81,17 @@ public class FilterApp extends UiApplication {
 		DabinciOSUtil.getInstance().requestPermission(permissions);
 		
 		try {
-			ApplicationPermissionsManager.getInstance()
-					.invokePermissionsRequest(permissions);
+			ApplicationPermissionsManager.getInstance().invokePermissionsRequest(permissions);
 		} catch (Exception e) {
 		}
+	}
+	
+	public boolean requestClose() {
+		onExit();
+		return super.requestClose();
+	}
+	
+	private void onExit() {
+		_session.close();
 	}
 }
