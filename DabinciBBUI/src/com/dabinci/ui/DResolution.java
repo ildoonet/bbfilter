@@ -25,11 +25,11 @@ public class DResolution {
 	public static Bitmap getBitmap(Bitmap bitmap) {
 		int width = getPixel(bitmap.getWidth());
 		int height = getPixel(bitmap.getHeight());
-		return GPATools.ResizeTransparentBitmap(bitmap, width, height, Bitmap.FILTER_LANCZOS, Bitmap.SCALE_TO_FIT);
+		return DBitmapTools.ResizeTransparentBitmap(bitmap, width, height, Bitmap.FILTER_LANCZOS, Bitmap.SCALE_TO_FIT);
 	}
 	
 	public static Bitmap getBitmap(Bitmap bitmap, int width, int height) {
-		return GPATools.ResizeTransparentBitmap(bitmap, width, height, Bitmap.FILTER_LANCZOS, Bitmap.SCALE_TO_FIT);
+		return DBitmapTools.ResizeTransparentBitmap(bitmap, width, height, Bitmap.FILTER_LANCZOS, Bitmap.SCALE_TO_FIT);
 	}
 	
 	public static Bitmap getBitmap(String bitmap, int width, int height) {
@@ -37,11 +37,11 @@ public class DResolution {
 	}
 	
 	public static Bitmap getBitmapByHeight(Bitmap bitmap, int height) {
-		return GPATools.resizeTransparentBitmapByHeight(bitmap, height);
+		return DBitmapTools.resizeTransparentBitmapByHeight(bitmap, height);
 	}
 	
 	public static Bitmap getProfileBitmapByHeight(Bitmap bitmap, int width, int height) {
-		return GPATools.getDefaultBitmapResized(bitmap, width, height);
+		return DBitmapTools.getDefaultBitmapResized(bitmap, width, height);
 	}
 
 	public static boolean isVerticalDisplay() {

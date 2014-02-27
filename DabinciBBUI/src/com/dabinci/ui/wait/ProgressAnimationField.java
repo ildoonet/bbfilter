@@ -21,7 +21,7 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Graphics;
 
-import com.dabinci.ui.GPATools;
+import com.dabinci.ui.DBitmapTools;
 
 public class ProgressAnimationField extends Field implements Runnable 
 {
@@ -43,7 +43,7 @@ public class ProgressAnimationField extends Field implements Runnable
     {
         super( style | Field.NON_FOCUSABLE );
         _bitmap = new Bitmap[] {
-        	GPATools.getTransparentBitmap(60, 60),
+        	DBitmapTools.getTransparentBitmap(60, 60),
         	Bitmap.getBitmapResource("wait1.png"),
         	Bitmap.getBitmapResource("wait2.png"),
         	Bitmap.getBitmapResource("wait3.png"),

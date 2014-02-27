@@ -7,18 +7,13 @@ import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.util.Arrays;
 import net.rim.device.api.util.ByteVector;
+
 /**
- * 이미지 리사이즈 관련 클래스
- * 투명 배경 파일 리사이즈 가능
- * 
  * @author    CurtisKim
- * @version   1.01
  */
-public class GPATools
-{
-	public static Bitmap ResizeBitmap(Bitmap bmpSrc, int nWidth, int nHeight)
-	{
-		if(bmpSrc==null)
+public class DBitmapTools {
+	public static Bitmap ResizeBitmap(Bitmap bmpSrc, int nWidth, int nHeight) {
+		if (bmpSrc == null)
 			return null;
 		
 		Bitmap revised = new Bitmap(nWidth, nHeight);
@@ -59,9 +54,8 @@ public class GPATools
      *                           <code>Bitmap.SCALE_STRETCH</code>.
      * @return              The resized Bitmap in a new object.
      */
-    public static Bitmap ResizeTransparentBitmap(Bitmap bmpSrc, int nWidth, int nHeight, int nFilterType, int nAspectRatio)
-    {
-        if(bmpSrc== null)
+    public static Bitmap ResizeTransparentBitmap(Bitmap bmpSrc, int nWidth, int nHeight, int nFilterType, int nAspectRatio) {
+        if (bmpSrc == null)
             return null;
 
         //Get the original dimensions of the bitmap
@@ -157,8 +151,7 @@ public class GPATools
         return bmpFinal;
     }
     
-    static public Bitmap getDefaultBitmapResized(Bitmap original, int width, int height)
-    {
+    static public Bitmap getDefaultBitmapResized(Bitmap original, int width, int height) {
     	if(width<=0 || height <=0 || original==null)
     		return original;
     	
@@ -244,7 +237,7 @@ public class GPATools
 	 * 비트맵 객체를 ByteVector로 변환함
 	 * */
 	public ByteVector getByteVectorFromBitmap(Bitmap bmp) {
-		if(bmp==null)
+		if (bmp == null)
 			return null;
 		
 		//비트맵 데이터를 바이트 배열로 가져옴
@@ -253,7 +246,7 @@ public class GPATools
 		//바이트 베열을 벡터 객체로 생성함
 		ByteVector a = new ByteVector(bitmap_arr.length);
 		
-		for(int i=0;i<bitmap_arr.length;i++)
+		for (int i = 0; i < bitmap_arr.length; i++)
 			a.addElement(bitmap_arr[i]);
 		
 		return a;
