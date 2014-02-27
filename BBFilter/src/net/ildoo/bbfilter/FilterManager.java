@@ -18,13 +18,13 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
 
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 import com.dabinci.utils.DLogger;
 
 public class FilterManager {
 	private static final String TAG = "FilterManager";
-	private static final int THUMBW = DResolution.getPixel(75);
-	private static final int THUMBH = DResolution.getPixel(75);
+	public static final int THUMBW = DRes.getPixel(75);
+	public static final int THUMBH = DRes.getPixel(75);
 	private static FilterGroup[] filterGroups;
 	
 	static {

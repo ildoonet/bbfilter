@@ -9,7 +9,7 @@ import net.rim.device.api.ui.decor.Background;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
 import com.dabinci.ui.DColor;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 
 public class DTextOnBitmapToggleButtonField extends DTextButtonField {
 
@@ -31,7 +31,7 @@ public class DTextOnBitmapToggleButtonField extends DTextButtonField {
 		
 		setBackground(Field.VISUAL_STATE_FOCUS, BackgroundFactory.createSolidBackground(DColor.getColor(DColor.COLOR_SELECTED_BG)));
 		setHeight(bg.getHeight());
-		setFontSize(DResolution.getFontHeight(18));
+		setFontSize(DRes.getFontHeight(18));
 	}
 
 	protected void layout(int maxWidth, int maxHeight) {

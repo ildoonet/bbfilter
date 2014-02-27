@@ -4,7 +4,7 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Graphics;
 
 import com.dabinci.ui.DNavLockManager;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 
 public class DToggleButtonField extends DBitmapButtonField {
 	protected volatile boolean isToggled;
@@ -16,10 +16,10 @@ public class DToggleButtonField extends DBitmapButtonField {
 	private DNavLockManager navigationManager = new DNavLockManager();
 
 	public static DToggleButtonField newInstance(Bitmap normal, Bitmap normalSelected, Bitmap toggled, Bitmap toggledSelected, int height) {
-		Bitmap normalResized = DResolution.getBitmapByHeight(normal, height);
-		Bitmap toggledResized = DResolution.getBitmapByHeight(toggled, height);
-		Bitmap normalSelectedResized = DResolution.getBitmapByHeight(normalSelected, height);
-		Bitmap toggledSelectedResized = DResolution.getBitmapByHeight(toggledSelected, height);
+		Bitmap normalResized = DRes.getBitmapByHeight(normal, height);
+		Bitmap toggledResized = DRes.getBitmapByHeight(toggled, height);
+		Bitmap normalSelectedResized = DRes.getBitmapByHeight(normalSelected, height);
+		Bitmap toggledSelectedResized = DRes.getBitmapByHeight(toggledSelected, height);
 		return new DToggleButtonField(normalResized, normalSelectedResized, toggledResized, toggledSelectedResized);
 	}
 	

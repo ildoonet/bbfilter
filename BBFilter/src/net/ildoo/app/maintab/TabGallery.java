@@ -13,7 +13,7 @@ import net.rim.device.api.ui.decor.BackgroundFactory;
 import net.rim.device.api.ui.picker.FilePicker;
 
 import com.dabinci.os.DabinciOSUtil;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 import com.dabinci.ui.button.DBitmapButtonField;
 import com.dabinci.ui.tab.DTabContent;
 import com.dabinci.utils.DFileUtils;
@@ -25,8 +25,8 @@ public class TabGallery extends DTabContent {
 	public TabGallery() {
 		
 		DBitmapButtonField btnGallery = new DBitmapButtonField(
-				DResolution.getBitmap(Bitmap.getBitmapResource("ico_gallery_off.png")),
-				DResolution.getBitmap(Bitmap.getBitmapResource("ico_gallery.png")), 
+				DRes.getBitmap(Bitmap.getBitmapResource("ico_gallery_off.png")),
+				DRes.getBitmap(Bitmap.getBitmapResource("ico_gallery.png")), 
 				Field.USE_ALL_WIDTH);
 		btnGallery.setBackground(Field.VISUAL_STATE_NORMAL, BackgroundFactory.createSolidBackground(Color.WHITE));
 		btnGallery.setMargin(getBtnMargin());

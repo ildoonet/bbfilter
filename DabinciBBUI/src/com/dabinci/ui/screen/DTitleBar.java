@@ -7,16 +7,16 @@ import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
 import com.dabinci.ui.DColor;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 import com.dabinci.ui.label.DLabelField;
 
 public class DTitleBar extends Manager {
 	public final static int TYPE_RIGHT = 0;		// 오른쪽 필드(rightField)를 오른쪽 정렬함		[-[title]-[desc]-----------[right]-]
 	public final static int TYPE_LEFT = 1;		// 오른쪽 필드(rightField)를 왼쪽 정렬함		[-[title]-[desc]-[right] ----------]
 	
-	private final static int DEFAULT_MARGIN = DResolution.getPixel(8);
-	public final static int HEIGHT = DResolution.getPixel(20);
-	private final static int DEFAULT_MARGIN_DESC = DResolution.getPixel(3);
+	private final static int DEFAULT_MARGIN = DRes.getPixel(8);
+	public final static int HEIGHT = DRes.getPixel(20);
+	private final static int DEFAULT_MARGIN_DESC = DRes.getPixel(3);
 
 	protected final static int BACKGROUND_COLOR = DColor.getColor(DColor.COLOR_BG);
 	
@@ -42,7 +42,7 @@ public class DTitleBar extends Manager {
 		super(USE_ALL_WIDTH);
 		
 		if (icon != null) {
-			iconField = new BitmapField(DResolution.getBitmap(icon));
+			iconField = new BitmapField(DRes.getBitmap(icon));
 		}
 		
 		titleField = DLabelField.newInstance(title, Field.NON_FOCUSABLE)

@@ -8,7 +8,7 @@ import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.decor.Border;
 import net.rim.device.api.ui.decor.BorderFactory;
 
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 import com.dabinci.ui.manager.DBorderManager;
 import com.dabinci.ui.wait.ProgressAnimationField;
 
@@ -103,7 +103,7 @@ public class DTabToolTipManager extends Manager {
 		private static Border border;
 		
 		static {
-			int b = DResolution.getPixel(15);
+			int b = DRes.getPixel(15);
 			border = BorderFactory.createRoundedBorder(
 					new XYEdges(b, b, b, b),
 					0x00000000,

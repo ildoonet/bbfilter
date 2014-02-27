@@ -7,7 +7,7 @@ import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
 import com.dabinci.ui.DColor;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 import com.dabinci.ui.tab.DTabToolTipManager;
 import com.dabinci.ui.tab.DTitleTabManager;
 import com.dabinci.ui.tab.DTitleTabManager.DTitleTab;
@@ -24,23 +24,23 @@ public class MainTabScreen extends MainScreen implements TabFocusChangeListener{
 		DTitleTabManager titleTabs = new DTitleTabManager();
 		titleTabs.addTab(
 				"Gallery",
-				DResolution.getBitmap(Bitmap.getBitmapResource("tab_gallery_off.png")),
-				DResolution.getBitmap(Bitmap.getBitmapResource("tab_gallery.png")), 
+				DRes.getBitmap(Bitmap.getBitmapResource("tab_gallery_off.png")),
+				DRes.getBitmap(Bitmap.getBitmapResource("tab_gallery.png")), 
 				new TabGallery());
 		titleTabs.addTab(
 				"My Filters",
-				DResolution.getBitmap(Bitmap.getBitmapResource("tab_filters_off.png")),
-				DResolution.getBitmap(Bitmap.getBitmapResource("tab_filters.png")), 
+				DRes.getBitmap(Bitmap.getBitmapResource("tab_filters_off.png")),
+				DRes.getBitmap(Bitmap.getBitmapResource("tab_filters.png")), 
 				new TabFilters());
 		titleTabs.addTab(
 				"Filter Store",
-				DResolution.getBitmap(Bitmap.getBitmapResource("tab_store_off.png")),
-				DResolution.getBitmap(Bitmap.getBitmapResource("tab_store.png")), 
+				DRes.getBitmap(Bitmap.getBitmapResource("tab_store_off.png")),
+				DRes.getBitmap(Bitmap.getBitmapResource("tab_store.png")), 
 				new TabStore());
 		titleTabs.addTab(
 				"Settings",
-				DResolution.getBitmap(Bitmap.getBitmapResource("tab_settings_off.png")),
-				DResolution.getBitmap(Bitmap.getBitmapResource("tab_settings.png")), 
+				DRes.getBitmap(Bitmap.getBitmapResource("tab_settings_off.png")),
+				DRes.getBitmap(Bitmap.getBitmapResource("tab_settings.png")), 
 				new TabSettings(), true);
 		titleTabs.setTab(0);
 		titleTabs.setTabChangeListener(this);

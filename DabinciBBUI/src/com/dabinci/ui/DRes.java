@@ -3,7 +3,7 @@ package com.dabinci.ui;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
 
-public class DResolution {
+public class DRes {
 	public static final int PIXEL_DEFAULT_WIDTH = 640;
 	public static final int PIXEL_DEFAULT_HEIGHT = 480;
 	

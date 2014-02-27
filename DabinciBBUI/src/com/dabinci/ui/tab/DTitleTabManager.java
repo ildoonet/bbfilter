@@ -9,7 +9,7 @@ import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
 import com.dabinci.ui.DColor;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 import com.dabinci.ui.button.DToggleButtonField;
 
 public class DTitleTabManager extends VerticalFieldManager {
@@ -39,10 +39,10 @@ public class DTitleTabManager extends VerticalFieldManager {
 			tab.setLockMovement(Manager.RIGHTWARD, true);
 		
 		tab.setPadding(new XYEdges(
-				DResolution.getPixel(3),
-				DResolution.getPixel(25),
-				DResolution.getPixel(3),
-				DResolution.getPixel(25)
+				DRes.getPixel(3),
+				DRes.getPixel(25),
+				DRes.getPixel(3),
+				DRes.getPixel(25)
 			));
 		tabs.add(tab);
 	}

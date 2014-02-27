@@ -4,7 +4,7 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.component.LabelField;
 
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 
 public class DLabelField extends LabelField {
 	
@@ -18,15 +18,15 @@ public class DLabelField extends LabelField {
 	public final static int COLOR_DESC_SETTING = 0x999999;
 	public final static int COLOR_DESC_SETTING2 = 0x493334;
 	
-	public final static int FONT_SIZE_TITLE = DResolution.getFontHeight(11);
-	public final static int FONT_SIZE_BUTTON = DResolution.getFontHeight(14);
-	public final static int FONT_SIZE_DESC = DResolution.getFontHeight(13);
-	public final static int FONT_SIZE_DESC_SETTING = DResolution.getFontHeight(12);
-	public final static int FONT_SIZE_DESC_SMALL = DResolution.getFontHeight(11);
-	public final static int FONT_SIZE_TAB = DResolution.getFontHeight(15);
-	public final static int FONT_SIZE_REG_TITLE = DResolution.getFontHeight(16);
+	public final static int FONT_SIZE_TITLE = DRes.getFontHeight(11);
+	public final static int FONT_SIZE_BUTTON = DRes.getFontHeight(14);
+	public final static int FONT_SIZE_DESC = DRes.getFontHeight(13);
+	public final static int FONT_SIZE_DESC_SETTING = DRes.getFontHeight(12);
+	public final static int FONT_SIZE_DESC_SMALL = DRes.getFontHeight(11);
+	public final static int FONT_SIZE_TAB = DRes.getFontHeight(15);
+	public final static int FONT_SIZE_REG_TITLE = DRes.getFontHeight(16);
 	
-	private final static int MARGIN_DEFAULT = DResolution.getPixel(8);
+	private final static int MARGIN_DEFAULT = DRes.getPixel(8);
 	
 	private int color;
 	private int fixedWidth;

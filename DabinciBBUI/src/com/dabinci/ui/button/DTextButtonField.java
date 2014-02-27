@@ -6,7 +6,7 @@ import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
 import com.dabinci.ui.DColor;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 
 public class DTextButtonField extends DBaseButtonField {
 
@@ -27,15 +27,15 @@ public class DTextButtonField extends DBaseButtonField {
 	private final static int COLOR_TEXT_GREY = 0x222222;
 	
 
-	public final static int TEXT_SIZE_NORMAL = DResolution.getFontHeight(25);
-	public final static int TEXT_SIZE = DResolution.getFontHeight(20);
-	public final static int TEXT_SIZE_SMALL = DResolution.getFontHeight(12);
+	public final static int TEXT_SIZE_NORMAL = DRes.getFontHeight(25);
+	public final static int TEXT_SIZE = DRes.getFontHeight(20);
+	public final static int TEXT_SIZE_SMALL = DRes.getFontHeight(12);
 	
-	private final static int DEFAULT_HEIGHT = DResolution.getPixel(32);
-	public final static int DEFAULT_HEIGHT_NORMAL = DResolution.getPixel(42);
-	private final static int DEFAULT_PADDING_HORIZONTAL = DResolution.getPixel(15);
+	private final static int DEFAULT_HEIGHT = DRes.getPixel(32);
+	public final static int DEFAULT_HEIGHT_NORMAL = DRes.getPixel(42);
+	private final static int DEFAULT_PADDING_HORIZONTAL = DRes.getPixel(15);
 	
-	public final static int SMALL_BUTTON_HEIGHT = DResolution.getPixel(24);
+	public final static int SMALL_BUTTON_HEIGHT = DRes.getPixel(24);
 
 
 	private String text;

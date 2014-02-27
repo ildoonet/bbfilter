@@ -7,7 +7,7 @@ import net.rim.device.api.ui.decor.Border;
 import net.rim.device.api.ui.decor.BorderFactory;
 
 import com.dabinci.ui.DColor;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 
 public abstract class DTabContent extends VerticalFieldManager {
 	public DTabContent() {
@@ -23,22 +23,22 @@ public abstract class DTabContent extends VerticalFieldManager {
 	public abstract void requestRefresh();
 	
 	public XYEdges getBtnMargin() {
-		int m = DResolution.getPixel(10);
+		int m = DRes.getPixel(10);
 		return new XYEdges(m, m, m, m);
 	}
 	
 	public XYEdges getBtnMarginWithoutBottom() {
-		int m = DResolution.getPixel(10);
+		int m = DRes.getPixel(10);
 		return new XYEdges(m, m, 0, m);
 	}
 	
 	public XYEdges getBtnMarginWithoutVerticals() {
-		int m = DResolution.getPixel(10);
+		int m = DRes.getPixel(10);
 		return new XYEdges(0, m, 0, m);
 	}
 	
 	public XYEdges getBtnMarginWithoutTop() {
-		int m = DResolution.getPixel(10);
+		int m = DRes.getPixel(10);
 		return new XYEdges(0, m, m, m);
 	}
 	

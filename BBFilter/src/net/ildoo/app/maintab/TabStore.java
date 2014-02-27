@@ -8,7 +8,7 @@ import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.component.NullField;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 import com.dabinci.ui.manager.DCenterManager;
 import com.dabinci.ui.tab.DTabContent;
 
@@ -23,7 +23,7 @@ public class TabStore extends DTabContent {
 		DCenterManager manager = new DCenterManager();
 		
 		VerticalFieldManager vfm = new VerticalFieldManager(Manager.NO_VERTICAL_SCROLL);
-		Bitmap iconBmp = DResolution.getBitmap(Bitmap.getBitmapResource("ico_alert_grey.png"));
+		Bitmap iconBmp = DRes.getBitmap(Bitmap.getBitmapResource("ico_alert_grey.png"));
 		vfm.add(new BitmapField(iconBmp, Field.FIELD_HCENTER));
 		vfm.add(new LabelField("Filter Store is coming soon", Field.FIELD_HCENTER));
 		vfm.add(new NullField(Field.FOCUSABLE));

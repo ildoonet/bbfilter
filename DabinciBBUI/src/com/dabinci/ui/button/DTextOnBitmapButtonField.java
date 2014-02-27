@@ -6,7 +6,7 @@ import net.rim.device.api.ui.decor.Background;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
 import com.dabinci.ui.DColor;
-import com.dabinci.ui.DResolution;
+import com.dabinci.ui.DRes;
 
 public class DTextOnBitmapButtonField extends DTextButtonField {
 
@@ -19,6 +19,6 @@ public class DTextOnBitmapButtonField extends DTextButtonField {
 						Background.REPEAT_NONE));
 		
 		setBackground(Field.VISUAL_STATE_FOCUS, BackgroundFactory.createSolidBackground(DColor.getColor(DColor.COLOR_SELECTED_BG)));
-		setHeight(DResolution.getPixel(60));
+		setHeight(DRes.getPixel(60));
 	}
 }
