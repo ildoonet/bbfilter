@@ -6,9 +6,13 @@ import net.ildoo.bbfilter.filter.FilterGroup;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.FieldChangeListener;
 
+import com.dabinci.ui.DRes;
+import com.dabinci.ui.button.DBitmapButtonField;
 import com.dabinci.ui.button.DTextOnBitmapToggleButtonField;
 import com.dabinci.ui.button.DTextOnBitmapToggleButtonField.onChangeToggleStatus;
+import com.dabinci.ui.manager.DHorizontalEvenManager;
 import com.dabinci.utils.DLogger;
 
 public class FilterSelectorScreen extends FilterBaseScreen {
@@ -26,6 +30,25 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 
 		filterManager.requestThumbs(bitmap, filterGroup);
 		tooltipManager.startWaitingDialog(2);
+		
+		// save/cancel button
+		DBitmapButtonField btnSave = new DBitmapButtonField(DRes.getBitmap(Bitmap.getBitmapResource("ico_ok.png")));
+		btnSave.setChangeListener(new FieldChangeListener() {
+			public void fieldChanged(Field field, int context) {
+				
+			}
+		});
+		
+		DBitmapButtonField btnCancel = new DBitmapButtonField(DRes.getBitmap(Bitmap.getBitmapResource("ico_cancel.png")));
+		btnCancel.setChangeListener(new FieldChangeListener() {
+			public void fieldChanged(Field field, int context) {
+				close();
+			}
+		});
+		DHorizontalEvenManager statusManager = new DHorizontalEvenManager(DRes.getPixel(3));
+		statusManager.add(btnSave);
+		statusManager.add(btnCancel);
+		setStatus(statusManager);
 	}
 
 	public void onFiltered(Bitmap bitmap) {
