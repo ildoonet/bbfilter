@@ -13,7 +13,6 @@ import com.dabinci.ui.manager.DBorderManager;
 import com.dabinci.ui.wait.ProgressAnimationField;
 
 public class DTabToolTipManager extends Manager {
-
 	private final Manager contents;
 	private final DTabToolTipField tooltip;
 	private final ProgressAnimationField progress;

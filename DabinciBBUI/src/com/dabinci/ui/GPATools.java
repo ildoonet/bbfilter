@@ -1,17 +1,18 @@
 package com.dabinci.ui;
 
 import net.rim.device.api.system.Bitmap;
+import net.rim.device.api.system.EncodedImage;
+import net.rim.device.api.system.PNGEncodedImage;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.util.Arrays;
+import net.rim.device.api.util.ByteVector;
 /**
- *
  * 이미지 리사이즈 관련 클래스
  * 투명 배경 파일 리사이즈 가능
  * 
  * @author    CurtisKim
  * @version   1.01
- *
  */
 public class GPATools
 {
@@ -218,5 +219,51 @@ public class GPATools
         revised.setARGB(dataTransparent, 0, width, 0, 0, width, height);   
     	
     	return revised;
+    }
+    
+	/**
+	 * 바이트벡터로부터 비트맵을 생성함
+	 * */
+	public Bitmap getBitmapFromByteVector(ByteVector byteVector) {
+		// 유저가 지정한 사진이 저장되어 있는 경우
+		try {
+			byte[] byte_arr = byteVector.getArray();
+
+			EncodedImage ei = EncodedImage.createEncodedImage(byte_arr, 0, -1);
+			Bitmap bmp = ei.getBitmap();
+
+			return bmp;
+		} catch (Exception e) {
+			// do nothing
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 비트맵 객체를 ByteVector로 변환함
+	 * */
+	public ByteVector getByteVectorFromBitmap(Bitmap bmp) {
+		if(bmp==null)
+			return null;
+		
+		//비트맵 데이터를 바이트 배열로 가져옴
+		byte[] bitmap_arr = getBytesFromBitmap(bmp);
+		
+		//바이트 베열을 벡터 객체로 생성함
+		ByteVector a = new ByteVector(bitmap_arr.length);
+		
+		for(int i=0;i<bitmap_arr.length;i++)
+			a.addElement(bitmap_arr[i]);
+		
+		return a;
+	}
+	
+	/**
+	 * 비트맵 객체를 byte array로 변환함
+	 * */
+	public byte[] getBytesFromBitmap(Bitmap bmp) { 
+		PNGEncodedImage png = PNGEncodedImage.encode(bmp);
+		return png.getData();
     }
 } 
