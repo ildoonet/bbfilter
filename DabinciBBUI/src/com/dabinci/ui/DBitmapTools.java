@@ -217,7 +217,7 @@ public class DBitmapTools {
 	/**
 	 * 바이트벡터로부터 비트맵을 생성함
 	 * */
-	public Bitmap getBitmapFromByteVector(ByteVector byteVector) {
+	public static Bitmap getBitmapFromByteVector(ByteVector byteVector) {
 		// 유저가 지정한 사진이 저장되어 있는 경우
 		try {
 			byte[] byte_arr = byteVector.getArray();
@@ -236,7 +236,7 @@ public class DBitmapTools {
 	/**
 	 * 비트맵 객체를 ByteVector로 변환함
 	 * */
-	public ByteVector getByteVectorFromBitmap(Bitmap bmp) {
+	public static ByteVector getByteVectorFromBitmap(Bitmap bmp) {
 		if (bmp == null)
 			return null;
 		
@@ -255,7 +255,7 @@ public class DBitmapTools {
 	/**
 	 * 비트맵 객체를 byte array로 변환함
 	 * */
-	public byte[] getBytesFromBitmap(Bitmap bmp) { 
+	public static byte[] getBytesFromBitmap(Bitmap bmp) { 
 		PNGEncodedImage png = PNGEncodedImage.encode(bmp);
 		return png.getData();
     }
