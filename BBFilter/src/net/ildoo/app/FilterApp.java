@@ -40,10 +40,10 @@ public class FilterApp extends UiApplication {
 		// Push a screen onto the UI stack for rendering.
 		setPermission();
 		
+		pushScreen(new MainTabScreen());
+		
 		_session.open();
 		_session.upload();
-		
-		pushScreen(new MainTabScreen());
 	}
 	
 	void setPermission() {
@@ -54,7 +54,9 @@ public class FilterApp extends UiApplication {
 				(ApplicationPermissions.PERMISSION_FILE_API),
 				(ApplicationPermissions.PERMISSION_MEDIA),
 				(ApplicationPermissions.PERMISSION_PHONE),
-				(ApplicationPermissions.PERMISSION_CROSS_APPLICATION_COMMUNICATION) };
+				(ApplicationPermissions.PERMISSION_CROSS_APPLICATION_COMMUNICATION),
+				(ApplicationPermissions.PERMISSION_INPUT_SIMULATION),
+			};
 
 		/* Permission Check */
 		ApplicationPermissionsManager manager = ApplicationPermissionsManager
