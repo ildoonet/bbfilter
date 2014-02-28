@@ -34,7 +34,7 @@ public class DBitmapButtonField extends DBaseButtonField {
 	protected Runnable action;
 
 	public DBitmapButtonField(Bitmap normalState) {
-		this(normalState, normalState, 0);
+		this(normalState, null, 0);
 	}
 
 	public DBitmapButtonField(Bitmap normalState, Bitmap focusState) {
@@ -44,6 +44,9 @@ public class DBitmapButtonField extends DBaseButtonField {
 	public DBitmapButtonField(Bitmap normalState, Bitmap focusState, long style) {
 		super(Field.FOCUSABLE | style);
 
+		if (focusState == null)
+			focusState = normalState;
+		
 		if ((normalState.getWidth() != focusState.getWidth()) || (normalState.getHeight() != focusState.getHeight())) {
 			throw new IllegalArgumentException("Image sizes don't match");
 		}

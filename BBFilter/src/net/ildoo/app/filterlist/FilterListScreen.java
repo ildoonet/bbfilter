@@ -25,7 +25,9 @@ public class FilterListScreen extends DMainScreen {
 		final int padding_v = DRes.getPixel(10);
 		hfm.setPadding(padding_v, padding_h, padding_v, padding_h);
 		hfm.add(new BitmapField(smallBitmap));
-		hfm.add(new LabelField("Select a filter", Field.FIELD_VCENTER | LabelField.ELLIPSIS));
+		Field lbDesc;
+		hfm.add(lbDesc = new LabelField("Select a filter", Field.FIELD_VCENTER | LabelField.ELLIPSIS));
+		lbDesc.setMargin(0, 0, 0, DRes.getPixel(3));
 		add(hfm);
 		
 		// 필터 리스트

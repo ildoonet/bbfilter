@@ -8,6 +8,7 @@ import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 
 import com.dabinci.ui.manager.DCenterManager;
+import com.dabinci.ui.manager.DHorizontalEvenManager;
 import com.dabinci.utils.DLogger;
 
 public class FilterSelectorField extends VerticalFieldManager {
@@ -16,20 +17,29 @@ public class FilterSelectorField extends VerticalFieldManager {
 	private final DCenterManager centerManager;
 	private final BitmapField bitmapField;
 	private final HorizontalFieldManager thumbs;
+	private final DHorizontalEvenManager buttonWrapper;
 	
 	public FilterSelectorField() {
-		super(USE_ALL_WIDTH | NO_VERTICAL_SCROLL);
+		super(USE_ALL_WIDTH | NO_VERTICAL_SCROLL | USE_ALL_HEIGHT);
 		
 		add(centerManager = new DCenterManager());
 		centerManager.add(bitmapField = new BitmapField());
 
 		thumbs = new HorizontalFieldManager(Field.FIELD_HCENTER);
 		add(thumbs);
+		
+		buttonWrapper = new DHorizontalEvenManager(0);
+		add(buttonWrapper);
 	}
 	
 	protected void sublayout(int maxWidth, int maxHeight) {
 		super.sublayout(maxWidth, maxHeight);
 
+		// button wrapper
+		setPositionChild(buttonWrapper, 0, getHeight() - buttonWrapper.getHeight());
+		maxHeight -= buttonWrapper.getHeight();
+		
+		// thumbs
 		layoutChild(thumbs, maxWidth, maxHeight);
 		
 		centerManager.setWidth(maxWidth);
@@ -38,6 +48,11 @@ public class FilterSelectorField extends VerticalFieldManager {
 		setPositionChild(centerManager, 0, 0);
 		
 		setPositionChild(thumbs, thumbs.getLeft(), maxHeight - thumbs.getHeight());
+	}
+	
+
+	protected void addBottomButton(Field field) {
+		buttonWrapper.add(field);
 	}
 	
 	public Manager getThumbnailManager() {

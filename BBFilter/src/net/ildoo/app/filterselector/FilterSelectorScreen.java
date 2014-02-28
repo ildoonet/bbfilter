@@ -12,7 +12,6 @@ import com.dabinci.ui.DRes;
 import com.dabinci.ui.button.DBitmapButtonField;
 import com.dabinci.ui.button.DTextOnBitmapToggleButtonField;
 import com.dabinci.ui.button.DTextOnBitmapToggleButtonField.onChangeToggleStatus;
-import com.dabinci.ui.manager.DHorizontalEvenManager;
 import com.dabinci.utils.DLogger;
 
 public class FilterSelectorScreen extends FilterBaseScreen {
@@ -32,23 +31,30 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 		tooltipManager.startWaitingDialog(2);
 		
 		// save/cancel button
-		DBitmapButtonField btnSave = new DBitmapButtonField(DRes.getBitmap(Bitmap.getBitmapResource("ico_ok.png")));
+		DBitmapButtonField btnSave = new DBitmapButtonField(
+				DRes.getBitmap(Bitmap.getBitmapResource("ico_ok.png")), 
+				null,
+				Field.USE_ALL_WIDTH
+			);
 		btnSave.setChangeListener(new FieldChangeListener() {
 			public void fieldChanged(Field field, int context) {
 				
 			}
 		});
 		
-		DBitmapButtonField btnCancel = new DBitmapButtonField(DRes.getBitmap(Bitmap.getBitmapResource("ico_cancel.png")));
+		DBitmapButtonField btnCancel = new DBitmapButtonField(
+				DRes.getBitmap(Bitmap.getBitmapResource("ico_cancel.png")),
+				null,
+				Field.USE_ALL_WIDTH
+			);
 		btnCancel.setChangeListener(new FieldChangeListener() {
 			public void fieldChanged(Field field, int context) {
 				close();
 			}
 		});
-		DHorizontalEvenManager statusManager = new DHorizontalEvenManager(DRes.getPixel(3));
-		statusManager.add(btnSave);
-		statusManager.add(btnCancel);
-		setStatus(statusManager);
+		
+		manager.addBottomButton(btnSave);
+		manager.addBottomButton(btnCancel);
 	}
 
 	public void onFiltered(Bitmap bitmap) {

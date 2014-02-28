@@ -36,7 +36,6 @@ abstract class FilterBaseScreen extends DMainScreen implements FilterListener {
 		add(tooltipManager = new DTabToolTipManager(manager = new FilterSelectorField()));
 	}
 	
-	
 	// FilterListener Implementation
 	
 	public void onThumbnailed(Bitmap originalThumb, FilteredBitmap[] thumbs) {}
