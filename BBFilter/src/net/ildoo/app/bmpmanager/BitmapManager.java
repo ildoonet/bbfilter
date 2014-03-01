@@ -38,6 +38,14 @@ public class BitmapManager {
 		
 	}
 	
+	public int getSize() {
+		return list.size();
+	}
+	
+	public long getKey(final int index) {
+		return list.elementAt(index);
+	}
+	
 	public Bitmap getBitmap(long key) {
 		if (list.contains(key) == false)
 			return null;

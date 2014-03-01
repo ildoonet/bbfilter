@@ -2,13 +2,19 @@ package com.dabinci.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Enumeration;
 
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
 import javax.microedition.io.file.FileSystemRegistry;
 
+import net.rim.device.api.system.Bitmap;
+import net.rim.device.api.system.JPEGEncodedImage;
+
 public class DFileUtils {
+	private static final String TAG = "DFileUtils";
+
 	public static boolean hasSdcardStorage() {
         boolean sdCardPresent = false;
         String root = null;
@@ -44,6 +50,14 @@ public class DFileUtils {
 		r = hasSystemStorage & hasInternalStorage;
 		
 		return r;
+	}
+	
+	public static String getDefaultPhotoFolderPath() {
+		if (hasSdcardStorage()) {
+			return System.getProperty("fileconn.dir.memorycard.photos");
+		}
+		
+		return System.getProperty("fileconn.dir.photos");
 	}
 	
 	public static byte[] getBytesFromFile(String filePath) {
@@ -95,5 +109,71 @@ public class DFileUtils {
     			}
 			}
 		}
+	}
+	
+	public static boolean saveBitmapAsJPG(String path, Bitmap bmp) {
+		DLogger.log(TAG, "saveBitmapAsJPG start - path : " + path);
+		FileConnection fconn = null;
+		OutputStream output = null;
+		try {
+			JPEGEncodedImage encodedImage = JPEGEncodedImage.encode(bmp, 80);
+			if (encodedImage == null) {
+				DLogger.log(TAG, "JPEGEncodedImage.encode() is null.");
+				return false;
+			}
+			
+			byte[] imageBytes = encodedImage.getData();
+			if (imageBytes == null) {
+				DLogger.log(TAG, "JPEGEncodedImage.encode().getData() is null.");
+				return false;
+			}
+			
+			fconn = (FileConnection) Connector.open(path);
+			if (!fconn.exists()) {
+				fconn.create();
+			}
+			output = fconn.openOutputStream();
+			output.write(imageBytes);
+			output.flush();
+			return true;
+		} catch (Exception e) {
+			DLogger.log(TAG, "FileUtils.saveBitmapAsJPG() e = " + e.toString());
+			return false;
+		} finally {
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+				}
+			}
+
+			if (fconn != null) {
+				try {
+					fconn.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+	}
+	
+	public static void createFolder(String path) {
+		DLogger.log(TAG, "+createFolder() " + path);
+		FileConnection fc = null;
+		try {
+			fc = (FileConnection) Connector.open(path, Connector.READ_WRITE);
+			if (false == fc.exists()) {
+				fc.mkdir();
+			}
+		} catch (Exception e) {
+			DLogger.log(TAG, "createFolder() " + path + ", e: " + e.toString());
+		} finally {
+			if (fc != null) {
+				try {
+					fc.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+		DLogger.log(TAG, "-createFolder() " + path);
 	}
 }
