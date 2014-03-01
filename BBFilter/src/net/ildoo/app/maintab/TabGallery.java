@@ -138,6 +138,9 @@ public class TabGallery extends DTabContent {
             			
             			UiApplication.getUiApplication().removeFileSystemJournalListener(cameraListener);
 
+            			// open the file user selected.
+            			if (path.startsWith("file://") == false)
+            				path = "file://" + path;
             			openFromFilePath(path);
                     	break;
                     case FileSystemJournalEntry.FILE_DELETED:
