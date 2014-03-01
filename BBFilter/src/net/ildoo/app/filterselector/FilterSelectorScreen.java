@@ -14,6 +14,7 @@ import com.dabinci.ui.DRes;
 import com.dabinci.ui.button.DBitmapButtonField;
 import com.dabinci.ui.button.DTextOnBitmapToggleButtonField;
 import com.dabinci.ui.button.DTextOnBitmapToggleButtonField.onChangeToggleStatus;
+import com.dabinci.ui.screen.popup.DOkPopupScreen;
 import com.dabinci.utils.DFileUtils;
 import com.dabinci.utils.DLogger;
 
@@ -42,7 +43,8 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 		btnSave.setChangeListener(new FieldChangeListener() {
 			public void fieldChanged(Field field, int context) {
 				if (filtered == null) {
-					// TODO
+					DOkPopupScreen popup = new DOkPopupScreen(DOkPopupScreen.TYPE_ALERT, "Select a filtered picture.", null);
+					popup.show();
 					return;
 				}
 				
@@ -60,6 +62,12 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 
 				DLogger.tlog(TAG, "save filterChanged() -");
 				close();
+				
+				// notify user
+				String userPath = fullPath + fileName;
+				userPath = userPath.substring("file://".length());
+				DOkPopupScreen popup = new DOkPopupScreen(DOkPopupScreen.TYPE_INFO, "Picture saved at\n" + userPath, null);
+				popup.show();
 			}
 		});
 		
