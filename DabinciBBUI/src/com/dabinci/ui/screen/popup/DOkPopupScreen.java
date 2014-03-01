@@ -13,7 +13,8 @@ public class DOkPopupScreen extends DBasePopupScreen {
 		super.lb.setText(message);
 		
 		Bitmap okButtonBitmap = Bitmap.getBitmapResource("ico_ok.png");
-		Bitmap okButtonBitmapResized = DBitmapTools.ResizeTransparentBitmap(okButtonBitmap, okButtonBitmap.getWidth() / 2, okButtonBitmap.getHeight() / 2, Bitmap.FILTER_BOX, Bitmap.SCALE_TO_FIT);
+		Bitmap okButtonBitmapResized = DBitmapTools.ResizeTransparentBitmap(okButtonBitmap, 
+				(int) (okButtonBitmap.getWidth() * 0.7), (int) (okButtonBitmap.getHeight() * 0.7), Bitmap.FILTER_BOX, Bitmap.SCALE_TO_FIT);
 		DBitmapButtonField btnOk = new DBitmapButtonField(DRes.getBitmap(okButtonBitmapResized), null, Field.USE_ALL_WIDTH);
 		btnOk.setAction(new Runnable() {
 			public void run() {

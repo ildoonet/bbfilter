@@ -1,6 +1,7 @@
 package net.ildoo.app.filterlist;
 
 import net.ildoo.app.filterselector.FilterSelectorScreen;
+import net.ildoo.app.maintab.MainTabScreen;
 import net.ildoo.bbfilter.filter.FilterGroup;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
@@ -34,7 +35,7 @@ public class FilterListManager extends VerticalFieldManager {
 						bitmap = filterGroup.getSampleBitmap();
 					}
 					
-					UiApplication.getUiApplication().pushScreen(new FilterSelectorScreen(filterGroup.getGroupName(), bitmap, null, filterGroup));
+					UiApplication.getUiApplication().pushScreen(new FilterSelectorScreen(getScreen(), filterGroup.getGroupName(), bitmap, null, filterGroup));
 				}
 			});
 			add(btn);

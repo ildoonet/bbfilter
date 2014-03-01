@@ -3,10 +3,12 @@ package com.dabinci.ui.screen.popup;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Keypad;
+import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.component.NullField;
+import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.PopupScreen;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 
@@ -23,6 +25,9 @@ public abstract class DBasePopupScreen extends PopupScreen {
 	
 	public DBasePopupScreen(int type){
 		super(new VerticalFieldManager());
+		add(new NullField(Field.FOCUSABLE));
+		
+		HorizontalFieldManager hfm = new HorizontalFieldManager(Manager.NO_HORIZONTAL_SCROLL | Field.USE_ALL_WIDTH);
 		
 		Bitmap infoBmp  = null;
 		switch (type) {
@@ -40,16 +45,16 @@ public abstract class DBasePopupScreen extends PopupScreen {
 		}
 		
 		if (infoBmp != null) {
-			BitmapField bf = new BitmapField(infoBmp, Field.FIELD_HCENTER);
-			bf.setMargin(0, 0, DRes.getPixel(10), 0);
-			add(bf);
+			BitmapField bf = new BitmapField(infoBmp, Field.FIELD_VCENTER);
+			bf.setMargin(0, DRes.getPixel(10), 0, 0);
+			hfm.add(bf);
 		}
 		
-		add(new NullField(Field.FOCUSABLE));
-		
-		lb = new LabelField("");
+		lb = new LabelField("", Field.FIELD_VCENTER);
 		lb.setMargin(0, 0, DRes.getPixel(10), 0);
-		add(lb);
+		hfm.add(lb);
+		
+		add(hfm);
 		
 		btnWrapper = new DHorizontalEvenManager(0);
 		add(btnWrapper);

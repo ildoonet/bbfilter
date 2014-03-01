@@ -9,6 +9,7 @@ import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
+import net.rim.device.api.ui.Screen;
 
 import com.dabinci.ui.DRes;
 import com.dabinci.ui.button.DBitmapButtonField;
@@ -21,14 +22,16 @@ import com.dabinci.utils.DLogger;
 public class FilterSelectorScreen extends FilterBaseScreen {
 	private static final String TAG = "FilterSelector";
 	
+	private final Screen parent;
 	private final Bitmap bitmap;
 	private final FilterGroup filterGroup;
 	private Bitmap filtered;
 	
-	public FilterSelectorScreen(final String title, final Bitmap bitmap, final Bitmap blurred, final FilterGroup filterGroup) {
+	public FilterSelectorScreen(final Screen parent, final String title, final Bitmap bitmap, final Bitmap blurred, final FilterGroup filterGroup) {
 		super(title, bitmap, blurred);
 		setBackground(Color.BLACK);
 		
+		this.parent = parent;
 		this.bitmap = bitmap;
 		this.filterGroup = filterGroup;
 
@@ -62,6 +65,9 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 
 				DLogger.tlog(TAG, "save filterChanged() -");
 				close();
+				
+				if (parent != null)
+					parent.close();
 				
 				// notify user
 				String userPath = fullPath + fileName;
