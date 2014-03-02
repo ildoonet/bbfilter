@@ -17,6 +17,7 @@ import net.rim.device.api.system.EventInjector;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
+import net.rim.device.api.ui.Keypad;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.container.FlowFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
@@ -174,6 +175,13 @@ public class TabGallery extends DTabContent {
 		
 		Bitmap resized = bitmap;
 		if (bitmap.getWidth() * bitmap.getHeight() > width * height) {
+			float ratio1 = width / ((float) bitmap.getWidth());
+			float ratio2 = height / ((float) bitmap.getHeight());
+			float ratio = Math.min(ratio1, ratio2);
+			
+			width = (int) (bitmap.getWidth() * ratio);
+			height = (int) (bitmap.getHeight() * ratio);
+			
 			resized = new Bitmap(width, height);
 			bitmap.scaleInto(resized, Bitmap.FILTER_LANCZOS);
 		}
