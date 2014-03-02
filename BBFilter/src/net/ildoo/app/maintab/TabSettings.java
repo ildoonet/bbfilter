@@ -4,19 +4,26 @@ import net.rim.blackberry.api.browser.Browser;
 import net.rim.blackberry.api.invoke.Invoke;
 import net.rim.blackberry.api.invoke.MessageArguments;
 import net.rim.device.api.system.ApplicationDescriptor;
+import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.DeviceInfo;
 import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
+import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
+import com.dabinci.ui.DRes;
 import com.dabinci.ui.button.DTextButtonField;
 import com.dabinci.ui.tab.DTabContent;
 
 public class TabSettings extends DTabContent {
 
 	public void requestRefresh() {
+		BitmapField icon = new BitmapField(Bitmap.getBitmapResource("icon.png"), Field.FIELD_HCENTER);
+		icon.setMargin(DRes.getPixel(10), 0, 0, 0);
+		add(icon);
+		
 		LabelField lbVersion = new LabelField("Version : " + ApplicationDescriptor.currentApplicationDescriptor().getVersion());
 		lbVersion.setMargin(getBtnMargin());
 		add(lbVersion);
