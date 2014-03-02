@@ -28,6 +28,7 @@ import com.dabinci.ui.DBitmapTools;
 import com.dabinci.ui.DRes;
 import com.dabinci.ui.bitmap.DLazyBitmapField;
 import com.dabinci.ui.button.DBitmapButtonField;
+import com.dabinci.ui.screen.popup.DOkCancelPopupScreen;
 import com.dabinci.ui.tab.DTabContent;
 import com.dabinci.utils.DFileUtils;
 import com.dabinci.utils.DLogger;
@@ -118,6 +119,25 @@ public class TabGallery extends DTabContent {
 						galleryThread.start();
 					}
 				}
+				
+				protected boolean keyDown(int keycode, int time) {
+					if (Keypad.key(keycode) == Keypad.KEY_BACKSPACE) {
+						DLogger.log(TAG, "delete+");
+						DOkCancelPopupScreen screen = new DOkCancelPopupScreen(DOkCancelPopupScreen.TYPE_ALERT, 
+								"delete?", new Runnable() {
+									public void run() {
+										String path = BitmapManager.getInstance().getBitmapPath(key);
+										DFileUtils.deleteFile(path);
+										BitmapManager.getInstance().removeBitmapPath(key);
+										BitmapManager.getInstance().removeBitmap(key);
+										requestRefresh();
+									}
+								}, null);
+						screen.show();
+					}
+					
+					return super.keyDown(keycode, time);
+				}
 			};
 			lazyBitmap.setAction(new Runnable() {
 				public void run() {
@@ -132,6 +152,8 @@ public class TabGallery extends DTabContent {
 			});
 			galleryWrapper.add(lazyBitmap);
 		}
+		
+		needRefresh = false;
 	}
 	
 	protected void onVisibilityChange(boolean visible) {

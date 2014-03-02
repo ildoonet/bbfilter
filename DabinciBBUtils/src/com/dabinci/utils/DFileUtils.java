@@ -176,4 +176,28 @@ public class DFileUtils {
 		}
 		DLogger.log(TAG, "-createFolder() " + path);
 	}
+	
+	public static void deleteFile(String filepath) {
+		if (filepath == null) {
+			return;
+		}
+
+		FileConnection fc = null;
+		try {
+			fc = (FileConnection) Connector.open(filepath);
+			if (fc.exists()) {
+				System.out.println("deleteFile - filepath : " + filepath);
+				fc.delete();
+			}
+		} catch (Exception e) {
+			System.out.println("FileUtils.deleteFile() - e: " + e.toString());
+		} finally {
+			if (fc != null) {
+				try {
+					fc.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+	}
 }

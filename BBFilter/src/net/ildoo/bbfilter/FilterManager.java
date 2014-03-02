@@ -9,10 +9,8 @@ import net.ildoo.bbfilter.filter.calm.FilterGroupCalm;
 import net.ildoo.bbfilter.filter.classic.FilterGroupClassic;
 import net.ildoo.bbfilter.filter.romance.FilterGroupRomance;
 import net.ildoo.bbfilter.filter.sepia.FilterGroupSepia;
-import net.ildoo.bbfilter.filter.stark.FilterGroupStark;
 import net.ildoo.bbfilter.filter.toy.FilterGroupToy;
 import net.ildoo.bbfilter.filter.vintage.FilterGroupVintage;
-import net.ildoo.bbfilter.filter.whitecat.FilterGroupWhitecat;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
@@ -33,10 +31,10 @@ public class FilterManager {
 				new FilterGroupToy(),
 				new FilterGroupRomance(),
 				new FilterGroupSepia(),
-				new FilterGroupStark(),
+//				new FilterGroupStark(),
 //				new FilterGroupSunnySide(),
 				new FilterGroupVintage(),
-				new FilterGroupWhitecat(),
+//				new FilterGroupWhitecat(),
 		};
 	}
 
