@@ -1,7 +1,6 @@
 package net.ildoo.app.filterlist;
 
 import net.ildoo.app.filterselector.FilterSelectorScreen;
-import net.ildoo.app.maintab.MainTabScreen;
 import net.ildoo.bbfilter.filter.FilterGroup;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
@@ -29,13 +28,15 @@ public class FilterListManager extends VerticalFieldManager {
 			btn.setChangeListener(new FieldChangeListener() {
 				public void fieldChanged(Field field, int context) {
 					Bitmap bitmap = null;
+					boolean needSaveButton = false;
 					if (FilterListManager.this.bitmap != null) {
 						bitmap = FilterListManager.this.bitmap;
+						needSaveButton = true;
 					} else {
 						bitmap = filterGroup.getSampleBitmap();
 					}
 					
-					UiApplication.getUiApplication().pushScreen(new FilterSelectorScreen(getScreen(), filterGroup.getGroupName(), bitmap, null, filterGroup));
+					UiApplication.getUiApplication().pushScreen(new FilterSelectorScreen(getScreen(), filterGroup.getGroupName(), bitmap, null, filterGroup, needSaveButton));
 				}
 			});
 			add(btn);

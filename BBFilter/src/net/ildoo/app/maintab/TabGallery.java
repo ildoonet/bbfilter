@@ -1,6 +1,8 @@
 package net.ildoo.app.maintab;
 
+import net.ildoo.app.FilterApp;
 import net.ildoo.app.FilterConfig;
+import net.ildoo.app.bmpmanager.BitmapManager;
 import net.ildoo.app.filterlist.FilterListScreen;
 import net.ildoo.bbfilter.FilterCache;
 import net.rim.blackberry.api.invoke.CameraArguments;
@@ -16,20 +18,28 @@ import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.UiApplication;
+import net.rim.device.api.ui.container.FlowFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import net.rim.device.api.ui.picker.FilePicker;
 
 import com.dabinci.os.DabinciOSUtil;
+import com.dabinci.ui.DBitmapTools;
 import com.dabinci.ui.DRes;
+import com.dabinci.ui.bitmap.DLazyBitmapField;
 import com.dabinci.ui.button.DBitmapButtonField;
 import com.dabinci.ui.tab.DTabContent;
 import com.dabinci.utils.DFileUtils;
 import com.dabinci.utils.DLogger;
+import com.dabinci.utils.thread.DabinciThread;
 
 public class TabGallery extends DTabContent {
 	protected static final String TAG = "TabGallery";
+	public static boolean needRefresh = true;
 
 	private final CameraListener cameraListener = new CameraListener();
+	private final FlowFieldManager galleryWrapper;
+	
+	private DabinciThread galleryThread;
 	
 	public TabGallery() {
 		// camera button
@@ -61,10 +71,75 @@ public class TabGallery extends DTabContent {
 			}
 		});
 		add(btnGallery);
+		
+		galleryWrapper = new FlowFieldManager(Field.USE_ALL_WIDTH);
+		galleryWrapper.setMargin(getBtnMargin());
+		galleryWrapper.setBorder(getBtnBorder());
+		galleryWrapper.setBackground(BackgroundFactory.createSolidBackground(Color.WHITE));
+		add(galleryWrapper);
+		
+		requestRefresh();
 	}
 	
-	public void requestRefresh() {
+	public synchronized void requestRefresh() {
+		if (galleryWrapper == null)
+			return;
+		
+		galleryWrapper.deleteAll();
+		
+		final int size = BitmapManager.getInstance().getSize();
+		final int width = (Display.getWidth() 
+				- getBtnMargin().left - getBtnMargin().right
+				- getBtnBorder().getLeft() - getBtnBorder().getRight()) / 4;
+		
+		final Bitmap icon = DBitmapTools.getDefaultBitmapResized(Bitmap.getBitmapResource("ico_loading_blue.png"), 
+				width, width);
+		
+		for (int i = size - 1; i >= 0; i--) {
+			final int idx = i;
+			final long key = BitmapManager.getInstance().getKey(idx);
+			final DLazyBitmapField lazyBitmap = new DLazyBitmapField(icon, 0l) {
+				public void requestBitmap() {
+					if (galleryThread == null || galleryThread.isAlive() == false) {
+						galleryThread = new DabinciThread();
+					}
+					
+					galleryThread.addRunnable(new Runnable() {
+						public void run() {
+							Bitmap bitmap = BitmapManager.getInstance().getBitmap(key);
 
+							if (bitmap != null)
+								onReqestCompleted(bitmap);
+						}
+					});
+					
+					if (galleryThread.isAlive() == false) {
+						galleryThread.start();
+					}
+				}
+			};
+			lazyBitmap.setAction(new Runnable() {
+				public void run() {
+					String path = BitmapManager.getInstance().getBitmapPath(key);
+					if (path == null) {
+						// TODO
+						return;
+					}
+					
+					DBitmapTools.viewInNative(FilterApp.class.getName(), path);
+				}
+			});
+			galleryWrapper.add(lazyBitmap);
+		}
+	}
+	
+	protected void onVisibilityChange(boolean visible) {
+		super.onVisibilityChange(visible);
+		
+		if (visible && needRefresh) {
+			needRefresh = false;
+			requestRefresh();
+		}
 	}
 	
 	private void startImagePicker() {

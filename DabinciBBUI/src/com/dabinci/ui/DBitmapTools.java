@@ -1,5 +1,10 @@
 package com.dabinci.ui;
 
+import javax.microedition.content.ContentHandler;
+import javax.microedition.content.Invocation;
+import javax.microedition.content.Registry;
+
+import net.rim.device.api.content.BlackBerryContentHandler;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.EncodedImage;
 import net.rim.device.api.system.PNGEncodedImage;
@@ -259,4 +264,21 @@ public class DBitmapTools {
 		PNGEncodedImage png = PNGEncodedImage.encode(bmp);
 		return png.getData();
     }
+	
+	public static void viewInNative(String classname, String mediaFileUri) {
+		if (mediaFileUri == null)
+			return;
+		
+		Registry registry = Registry.getRegistry(classname);
+
+		Invocation invocation_media = new Invocation(mediaFileUri, null,
+				BlackBerryContentHandler.ID_MEDIA_CONTENT_HANDLER, false, ContentHandler.ACTION_OPEN);
+		invocation_media.setArgs(new String[] { BlackBerryContentHandler.MEDIA_ARGUMENT_VIEW_PICTURES });
+
+		try {
+			registry.invoke(invocation_media);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
 } 

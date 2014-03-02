@@ -119,7 +119,10 @@ public abstract class DBaseButtonField extends Field {
 	 * A public way to click this button
 	 */
 	public void clickButton() {
-		navigationClick(0, 0);
 		fieldChangeNotify(0);
+	}
+	
+	public void navigationClick() {
+		navigationClick(0, 0);
 	}
 }

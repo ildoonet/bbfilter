@@ -27,7 +27,7 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 	private final FilterGroup filterGroup;
 	private Bitmap filtered;
 	
-	public FilterSelectorScreen(final Screen parent, final String title, final Bitmap bitmap, final Bitmap blurred, final FilterGroup filterGroup) {
+	public FilterSelectorScreen(final Screen parent, final String title, final Bitmap bitmap, final Bitmap blurred, final FilterGroup filterGroup, final boolean needSaveButton) {
 		super(title, bitmap, blurred);
 		setBackground(Color.BLACK);
 		
@@ -39,56 +39,59 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 		tooltipManager.startWaitingDialog(2);
 		
 		// save/cancel button
-		DBitmapButtonField btnSave = new DBitmapButtonField(
-				DRes.getBitmap(Bitmap.getBitmapResource("ico_ok.png")), 
-				null, Field.USE_ALL_WIDTH
-			);
-		btnSave.setChangeListener(new FieldChangeListener() {
-			public void fieldChanged(Field field, int context) {
-				if (filtered == null) {
-					DOkPopupScreen popup = new DOkPopupScreen(DOkPopupScreen.TYPE_ALERT, "Select a filtered picture.", null);
+		if (needSaveButton) {
+			DBitmapButtonField btnSave = new DBitmapButtonField(
+					DRes.getBitmap(Bitmap.getBitmapResource("ico_ok.png")), 
+					null, Field.USE_ALL_WIDTH
+				);
+			btnSave.setChangeListener(new FieldChangeListener() {
+				public void fieldChanged(Field field, int context) {
+					if (filtered == null) {
+						DOkPopupScreen popup = new DOkPopupScreen(DOkPopupScreen.TYPE_ALERT, "Select a filtered picture.", null);
+						popup.show();
+						return;
+					}
+					
+					DLogger.tlog(TAG, "save filterChanged() +");
+					// save to persistent store (gallery)
+					final long key = BitmapManager.getInstance().addBitmap(filtered);
+					
+					// save to media folder
+					final String mediaPath = DFileUtils.getDefaultPhotoFolderPath();
+					final String fullPath = mediaPath + FilterConfig.DIRECTORY + "/";
+					DFileUtils.createFolder(fullPath);
+					final String fileName = key + ".jpg";
+					
+					DFileUtils.saveBitmapAsJPG(fullPath + fileName, filtered);
+					BitmapManager.getInstance().addBitmapPath(key, fullPath + fileName);
+	
+					DLogger.tlog(TAG, "save filterChanged() -");
+					close();
+					
+					if (parent != null)
+						parent.close();
+					
+					// notify user
+					String userPath = fullPath + fileName;
+					userPath = userPath.substring("file://".length());
+					DOkPopupScreen popup = new DOkPopupScreen(DOkPopupScreen.TYPE_INFO, "Picture saved at\n" + userPath, null);
 					popup.show();
-					return;
 				}
-				
-				DLogger.tlog(TAG, "save filterChanged() +");
-				// save to persistent store (gallery)
-				BitmapManager.getInstance().addBitmap(filtered);
-				
-				// save to media folder
-				final String mediaPath = DFileUtils.getDefaultPhotoFolderPath();
-				final String fullPath = mediaPath + FilterConfig.DIRECTORY + "/";
-				DFileUtils.createFolder(fullPath);
-				final String fileName = System.currentTimeMillis() + ".jpg";
-				
-				DFileUtils.saveBitmapAsJPG(fullPath + fileName, filtered);
-
-				DLogger.tlog(TAG, "save filterChanged() -");
-				close();
-				
-				if (parent != null)
-					parent.close();
-				
-				// notify user
-				String userPath = fullPath + fileName;
-				userPath = userPath.substring("file://".length());
-				DOkPopupScreen popup = new DOkPopupScreen(DOkPopupScreen.TYPE_INFO, "Picture saved at\n" + userPath, null);
-				popup.show();
-			}
-		});
-		
-		DBitmapButtonField btnCancel = new DBitmapButtonField(
-				DRes.getBitmap(Bitmap.getBitmapResource("ico_cancel.png")),
-				null, Field.USE_ALL_WIDTH
-			);
-		btnCancel.setChangeListener(new FieldChangeListener() {
-			public void fieldChanged(Field field, int context) {
-				close();
-			}
-		});
-		
-		manager.addBottomButton(btnSave);
-		manager.addBottomButton(btnCancel);
+			});
+			
+			DBitmapButtonField btnCancel = new DBitmapButtonField(
+					DRes.getBitmap(Bitmap.getBitmapResource("ico_cancel.png")),
+					null, Field.USE_ALL_WIDTH
+				);
+			btnCancel.setChangeListener(new FieldChangeListener() {
+				public void fieldChanged(Field field, int context) {
+					close();
+				}
+			});
+			
+			manager.addBottomButton(btnSave);
+			manager.addBottomButton(btnCancel);
+		}
 	}
 
 	public void onFiltered(Bitmap bitmap) {
@@ -129,7 +132,7 @@ public class FilterSelectorScreen extends FilterBaseScreen {
 			manager.getThumbnailManager().add(btn);
 		}
 		
-		btnOriginal.clickButton();
+		btnOriginal.navigationClick();
 		DLogger.log(TAG, "onThumbnailed()-");
 	}
 
