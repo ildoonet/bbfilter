@@ -1,6 +1,7 @@
 package net.ildoo.bbfilter.filter.whitecat;
 
 import net.ildoo.bbfilter.filter.FilterGroup;
+import net.rim.device.api.system.Bitmap;
 
 public class FilterGroupWhitecat extends FilterGroup {
 	public void initGroup() {
@@ -14,4 +15,7 @@ public class FilterGroupWhitecat extends FilterGroup {
 		return "white cat".toUpperCase();
 	}
 
+	public Bitmap getTitleBitmap() {
+		return Bitmap.getBitmapResource("sample3.jpg");
+	}
 }

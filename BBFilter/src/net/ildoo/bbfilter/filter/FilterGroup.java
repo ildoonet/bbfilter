@@ -17,7 +17,7 @@ public abstract class FilterGroup {
 	}
 	
 	public Bitmap getSampleBitmap() {
-		return Bitmap.getBitmapResource("sample1.jpg");
+		return getTitleBitmap();
 	}
 	
 	public Class[] getFilters() {

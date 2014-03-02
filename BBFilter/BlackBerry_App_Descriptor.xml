@@ -9,7 +9,7 @@
     </Icons>
   </Resources>
   <KeywordResources KeywordResourceBundleName="" KeywordResourceBundleRelativePath="" KeywordResourceBundleClassName="" KeywordResourceBundleKey=""/>
-  <Compile OutputCompilerMessages="false" ConvertImages="true" CreateWarningForNoExportedRoutine="true" CompressResources="false" AliasList="">
+  <Compile OutputCompilerMessages="false" ConvertImages="true" CreateWarningForNoExportedRoutine="true" CompressResources="true" AliasList="">
     <PreprocessorDefines/>
   </Compile>
   <Packaging PreBuildStep="" PostBuildStep="" CleanStep="" OutputFileName="BBFilter" OutputFolder="deliverables" GenerateALXFile="true">

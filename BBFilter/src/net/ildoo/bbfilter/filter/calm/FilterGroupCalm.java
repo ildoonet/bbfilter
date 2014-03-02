@@ -7,7 +7,8 @@ public class FilterGroupCalm extends FilterGroup {
 	public void initGroup() {
 		filterList = new Class[] {
 			FilterCalm.class,
-			FilterSunrise.class
+			FilterSunrise.class,
+			FilterSunriseVignette.class
 		};
 	}
 

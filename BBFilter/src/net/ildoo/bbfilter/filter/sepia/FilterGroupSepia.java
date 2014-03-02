@@ -1,6 +1,7 @@
 package net.ildoo.bbfilter.filter.sepia;
 
 import net.ildoo.bbfilter.filter.FilterGroup;
+import net.rim.device.api.system.Bitmap;
 
 public class FilterGroupSepia extends FilterGroup {
 
@@ -14,5 +15,8 @@ public class FilterGroupSepia extends FilterGroup {
 	public String getGroupName() {
 		return "sepia".toUpperCase();
 	}
-
+	
+	public Bitmap getTitleBitmap() {
+		return Bitmap.getBitmapResource("sample4.jpg");
+	}
 }

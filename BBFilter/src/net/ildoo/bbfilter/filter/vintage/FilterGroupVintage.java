@@ -1,6 +1,7 @@
 package net.ildoo.bbfilter.filter.vintage;
 
 import net.ildoo.bbfilter.filter.FilterGroup;
+import net.rim.device.api.system.Bitmap;
 
 public class FilterGroupVintage extends FilterGroup {
 
@@ -17,4 +18,7 @@ public class FilterGroupVintage extends FilterGroup {
 		return "vintage".toUpperCase();
 	}
 
+	public Bitmap getTitleBitmap() {
+		return Bitmap.getBitmapResource("sample2.jpg");
+	}
 }

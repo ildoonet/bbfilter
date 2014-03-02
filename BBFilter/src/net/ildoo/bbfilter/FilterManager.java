@@ -10,7 +10,6 @@ import net.ildoo.bbfilter.filter.classic.FilterGroupClassic;
 import net.ildoo.bbfilter.filter.romance.FilterGroupRomance;
 import net.ildoo.bbfilter.filter.sepia.FilterGroupSepia;
 import net.ildoo.bbfilter.filter.stark.FilterGroupStark;
-import net.ildoo.bbfilter.filter.sunny.FilterGroupSunnySide;
 import net.ildoo.bbfilter.filter.toy.FilterGroupToy;
 import net.ildoo.bbfilter.filter.vintage.FilterGroupVintage;
 import net.ildoo.bbfilter.filter.whitecat.FilterGroupWhitecat;
@@ -31,11 +30,11 @@ public class FilterManager {
 		filterGroups = new FilterGroup[] {
 				new FilterGroupCalm(),
 				new FilterGroupClassic(),
+				new FilterGroupToy(),
 				new FilterGroupRomance(),
 				new FilterGroupSepia(),
 				new FilterGroupStark(),
-				new FilterGroupSunnySide(),
-				new FilterGroupToy(),
+//				new FilterGroupSunnySide(),
 				new FilterGroupVintage(),
 				new FilterGroupWhitecat(),
 		};
