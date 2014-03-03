@@ -19,6 +19,7 @@ import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Keypad;
 import net.rim.device.api.ui.UiApplication;
+import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.container.FlowFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import net.rim.device.api.ui.picker.FilePicker;
@@ -97,6 +98,7 @@ public class TabGallery extends DTabContent {
 		final Bitmap icon = DBitmapTools.getDefaultBitmapResized(Bitmap.getBitmapResource("ico_loading_blue.png"), 
 				width, width);
 		
+		// gallery
 		for (int i = size - 1; i >= 0; i--) {
 			final int idx = i;
 			final long key = BitmapManager.getInstance().getKey(idx);
@@ -151,6 +153,20 @@ public class TabGallery extends DTabContent {
 				}
 			});
 			galleryWrapper.add(lazyBitmap);
+		}
+		
+		// if there is no photo, show samples.
+		if (size == 0) {
+			LabelField lb = new LabelField("Those are sample photos. Please use filters to your photos." , Field.USE_ALL_WIDTH);
+			final int defaultMargin = DRes.getPixel(5);
+			lb.setMargin(defaultMargin,	defaultMargin, defaultMargin, defaultMargin);
+			galleryWrapper.add(lb);
+			
+			for (int i = 0; i < 7; i ++) {
+				final Bitmap iconSample = DBitmapTools.getDefaultBitmapResized(Bitmap.getBitmapResource("sample" + (i + 1) + ".jpg"), width, width);
+				final DLazyBitmapField sampleBitmap = new DLazyBitmapField(iconSample, 0l) {public void requestBitmap() {} };
+				galleryWrapper.add(sampleBitmap);
+			}
 		}
 		
 		needRefresh = false;

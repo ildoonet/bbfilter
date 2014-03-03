@@ -1,8 +1,10 @@
 package net.ildoo.app.maintab;
 
+import net.ildoo.app.FilterApp;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.Manager;
+import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 
@@ -69,5 +71,12 @@ public class MainTabScreen extends MainScreen implements TabFocusChangeListener{
 	
 	public void onTabUnfocus() {
 		tooltipManager.onToolTip(false);
+	}
+	
+	public void close() {
+		super.close();
+		try {
+			((FilterApp) UiApplication.getUiApplication()).onExit();
+		} catch (Exception e) {}
 	}
 }

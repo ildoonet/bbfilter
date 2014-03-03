@@ -96,7 +96,7 @@ public class FilterApp extends UiApplication {
 		return super.requestClose();
 	}
 	
-	private void onExit() {
+	public void onExit() {
 		_session.close();
 	}
 }
