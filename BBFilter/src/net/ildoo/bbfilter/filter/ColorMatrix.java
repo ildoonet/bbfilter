@@ -79,7 +79,7 @@ public class ColorMatrix {
 		for (int i = 0; i < 3; i++) {
 			final int ROW = i * 5;
 	        filtered[i] = bound(
-	        		vector_inner_product(mArray[ROW + 0], mArray[ROW + 1], mArray[ROW + 2], mArray[ROW + 4], nRed, nGreen, nBlue, 1), 
+	        		vector_inner_product(mArray[ROW + 0], mArray[ROW + 1], mArray[ROW + 2], mArray[ROW + 4], nRed, nGreen, nBlue), 
 	        		0 , 255);
 		}
 
@@ -87,8 +87,8 @@ public class ColorMatrix {
         return prevColor = filtered[2] | (filtered[1]<<8) | (filtered[0]<<16) | 0xff000000;
     }
     
-    private final static int vector_inner_product(float v1, float v2, float v3, float v4, int w1, int w2, int w3, int w4) {
-    	return (int) (v1 * w1 + v2 * w2 + v3 * w3 + v4 * w4);
+    private final static int vector_inner_product(float v1, float v2, float v3, float v4, int w1, int w2, int w3) {
+    	return (int) (v1 * w1 + v2 * w2 + v3 * w3 + v4);
     }
     
     private final int bound(int value, int min, int max) {
