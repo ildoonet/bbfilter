@@ -12,6 +12,7 @@ import net.ildoo.bbfilter.filter.sepia.FilterGroupSepia;
 import net.ildoo.bbfilter.filter.toy.FilterGroupToy;
 import net.ildoo.bbfilter.filter.vintage.FilterGroupVintage;
 import net.rim.device.api.system.Bitmap;
+import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
 
@@ -130,12 +131,12 @@ public class FilterManager {
 	}
 	
 	public void requestBlurredBacgkround(final Bitmap bitmap, final Field field) {
-		DLogger.log(TAG, "requestThumbs()+");
+		DLogger.log(TAG, "requestThumbs()+ bitmap is null=" + (bitmap==null) );
 		
 		Thread worker = new FilterThread(false) {
 			public void run() {
-				final int width = field.getWidth();
-				final int height = field.getHeight();
+				final int width = Display.getWidth();
+				final int height = Display.getHeight();
 				
 				Bitmap resized = new Bitmap(width, height);
 				bitmap.scaleInto(resized, Bitmap.FILTER_BOX, Bitmap.SCALE_TO_FILL);
@@ -149,14 +150,15 @@ public class FilterManager {
 				});
 			}
 		};
-		
 		worker.start();
 	}
 	
 	public void requestFilter(final Bitmap bitmap, final Filter filter) {
 		Thread worker = new FilterThread() {
 			public void run() {
+				DLogger.tlog(TAG, "filter+");
 				final Bitmap filtered = filter.filtering(bitmap, true);
+				DLogger.tlog(TAG, "filter-");
 				UiApplication.getUiApplication().invokeLater(new Runnable() {
 					public void run() {
 						listener.onFiltered(filtered);

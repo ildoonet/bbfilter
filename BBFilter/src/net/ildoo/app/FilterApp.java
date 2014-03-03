@@ -59,12 +59,12 @@ public class FilterApp extends UiApplication {
 			};
 
 		/* Permission Check */
-		ApplicationPermissionsManager manager = ApplicationPermissionsManager
-				.getInstance();
+		ApplicationPermissionsManager manager = ApplicationPermissionsManager.getInstance();
 		ApplicationPermissions current = manager.getApplicationPermissions();
 
 		ApplicationPermissions permissions = new ApplicationPermissions();
 
+		boolean needRequest = false;
 		for (int i = 0; i < permissions_list.length; i++) {
 			int int_permission = permissions_list[i];
 
@@ -74,17 +74,20 @@ public class FilterApp extends UiApplication {
 			if (current.getPermission(filepermission) != allow) {
 				try {
 					permissions.addPermission(int_permission);
+					needRequest = true;
 				} catch (Exception e) {
 				}
 			}
 			// end if
 		}// end for i
 
-		DabinciOSUtil.getInstance().requestPermission(permissions);
-		
-		try {
-			ApplicationPermissionsManager.getInstance().invokePermissionsRequest(permissions);
-		} catch (Exception e) {
+		if (needRequest) {
+			DabinciOSUtil.getInstance().requestPermission(permissions);
+			
+			try {
+				ApplicationPermissionsManager.getInstance().invokePermissionsRequest(permissions);
+			} catch (Exception e) {
+			}
 		}
 	}
 	

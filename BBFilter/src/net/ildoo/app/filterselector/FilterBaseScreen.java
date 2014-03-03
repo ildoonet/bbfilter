@@ -54,4 +54,11 @@ abstract class FilterBaseScreen extends DMainScreen implements FilterListener {
 			field.setBackground(BackgroundFactory.createBitmapBackground(bitmap, Background.POSITION_X_CENTER, Background.POSITION_Y_CENTER, Background.REPEAT_NONE));
 		DLogger.log(TAG, "onBlurred()-");
 	}
+	
+	public boolean onClose() {
+		try {
+			filterManager.cancelAll();
+		} catch (Throwable t) {}
+		return super.onClose();
+	}
 }

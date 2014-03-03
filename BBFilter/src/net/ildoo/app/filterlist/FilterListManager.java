@@ -24,7 +24,7 @@ public class FilterListManager extends VerticalFieldManager {
 		
 		for (int i = 0; i < groups.length; i++) {
 			final FilterGroup filterGroup = groups[i];
-			DTextOnBitmapButtonField btn = new DTextOnBitmapButtonField(filterGroup.getGroupName(), filterGroup.getSampleBitmap());
+			DTextOnBitmapButtonField btn = new DTextOnBitmapButtonField(filterGroup.getGroupName(), filterGroup.getTitleBitmap());
 			btn.setChangeListener(new FieldChangeListener() {
 				public void fieldChanged(Field field, int context) {
 					Bitmap bitmap = null;

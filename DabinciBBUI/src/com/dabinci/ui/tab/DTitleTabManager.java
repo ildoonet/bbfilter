@@ -115,6 +115,12 @@ public class DTitleTabManager extends VerticalFieldManager {
 			return super.navigationClick(status, time);
 		}
 		
+		protected boolean navigationMovement(int dx, int dy, int status, int time) {
+			if (dy < 0)
+				return true;
+			return super.navigationMovement(dx, dy, status, time);
+		}
+		
 		protected void onFocus(int direction) {
 			super.onFocus(direction);
 			if (DTitleTabManager.this.listener != null) {

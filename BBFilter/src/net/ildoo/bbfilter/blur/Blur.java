@@ -8,6 +8,9 @@ public class Blur {
 	private static final String TAG = "Blur";
 
 	public static Bitmap fastblur(Bitmap sentBitmap, int radius) {
+		if (sentBitmap == null)
+			return null;
+		
 		if (radius < 1) {
 			return (null);
 		}
@@ -20,6 +23,7 @@ public class Blur {
 		
 		int[] pix = new int[w * h];
 		DLogger.log(TAG, "pix " + w + " " + h + " " + pix.length);
+		DLogger.log(TAG, "original " + sentBitmap.getWidth());
 		half.getARGB(pix, 0, w, 0, 0, w, h);
 
 		int wm = w - 1;
